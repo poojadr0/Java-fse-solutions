@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local Community Event Portal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            line-height: 1.5;
+            padding: 1rem;
+            background: #f5f5f5;
+        }
+
+        #welcomeBanner {
+            background: #2563eb;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        nav a {
+            color: #333;
+            text-decoration: none;
+            padding: 0.5rem;
+        }
+
+        .highlight {
+            background: #fff3cd;
+            border-left: 4px solid #f59e0b;
+            padding: 0.5rem;
+            margin: 0.5rem 0;
+        }
+
+        table {
+            width: 100%;
+            margin: 1rem 0;
+            background: white;
+        }
+
+        td {
+            padding: 0.5rem;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .form-group {
+            margin-bottom: 0.5rem;
+        }
+
+        label {
+            display: block;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+        }
+
+        .error-message {
+            color: #dc2626;
+            font-size: 0.875rem;
+        }
+
+        button {
+            background: #2563eb;
+            color: white;
+            padding: 0.5rem 1rem;
+            border: none;
+            cursor: pointer;
+        }
+
+        .video-wrapper {
+            position: relative;
+            width: 80%;
+            max-width: 600px;
+            margin: 0 auto;
+            padding-bottom: 45%;
+            height: 0;
+            overflow: hidden;
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            max-width: 600px;
+        }
+
+        .coordinates {
+            background: #f5f5f5;
+            padding: 0.5rem;
+            font-family: monospace;
+            margin: 0.5rem 0;
+        }
+
+        #geoError {
+            color: #dc2626;
+            font-size: 0.875rem;
+        }
+
+        .enlarged {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 90vw;
+            max-height: 90vh;
+            z-index: 1000;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1rem;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center;">Find & Join Events Around You</h1>
+    <div id="welcomeBanner">
+        <h1>Welcome to Local Community Event Portal</h1>
+    </div>
+    
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="event">Event</a></li>
+            <li><a href="contact">Contact</a></li>
+            <li><a href="help.html" target="_blank">Help</a></li>
+        </ul>
+    </nav>
+    
+    <main>
+        <p>A local city council wants a lightweight, browser-based portal to help residents register for
+events, check locations, and access basic services.</p>
+        
+<table>
+  <caption>Highlights of Local Community Events</caption>
+  <tr>
+    <td>
+     <img src="https://www.rannutsavonline.com/blog/wp-content/uploads/2024/12/new-year-at-Rann-utsav-2025-830x474.webp" alt="Example Image" style="height: 300px; width:300px;">
+      <div class="desc">Annual celebration showcasing local arts, music, and dance.</div>
+    </td>
+    <td>
+      <img src="https://us.123rf.com/450wm/jemastock/jemastock1904/jemastock190433313/123070635-park-cleaning-volunteers-with-trash-can-and-bags-cartoons-vector-illustration-graphic-design.jpg?ver=6" alt="Example Image" style="height: 300px; width:300px;">
+       <div class="desc">Community effort to clean parks and streets for a greener city.</div>
+    </td>
+    <td>
+     <img src="https://img.freepik.com/premium-photo/free-photo-food-truck-city-festival-selective-focus_1041666-28178.jpg" alt="Example Image" style="height: 300px; width:300px;">
+       <div class="desc">Taste and enjoy dishes from local chefs and food trucks.</div>
+    </td>
+  </tr>
+  <tr>
+    <td>
+       <img src="https://media.istockphoto.com/id/1033906526/vector/donate-blood-concept-with-blood-bag-and-heart-blood-donation-vector-illustration-world-blood.jpg?s=612x612&w=0&k=20&c=bCDDE6DiGdlFspMA1RKRNeLBUWugSmi8U73ZCfYSbpg=" alt="Example Image" style="height: 300px; width:300px;">
+         <div class="desc">Save lives by donating blood at this community camp.</div>
+    </td>
+    <td>
+       <img src="https://img.freepik.com/free-photo/3d-music-related-scene_23-2151125037.jpg?semt=ais_hybrid&w=740" alt="Example Image" style="height: 300px; width:300px;">
+       <div class="desc">Enjoy live performances by local bands and artists.</div>
+    </td>
+    <td>
+       <img src="https://images.stockcake.com/public/f/e/5/fe563b8b-8a5a-4346-8fc1-4187d1a05a1e_large/high-tech-workshop-activity-stockcake.jpg" alt="Example Image" style="height: 300px; width:300px;">
+       <div class="desc">Hands-on sessions to learn coding and technology skills.</div>
+    </td>
+  </tr>
+</table>
+        <section id="events">
+             <h2>Upcoming Events</h2>
+
+<div class="event highlight">
+  <h3>Annual Cultural Fest</h3>
+  <p>Date: May 30, 2025 | Time: 6:00 PM</p>
+</div>
+
+<div class="event">
+  <h3>Community Clean-up Drive</h3>
+  <p>Date: June 5, 2025 | Time: 7:00 AM</p>
+</div>
+
+<div class="notice highlight">
+  <p>Registrations close on May 28! Hurry up!</p>
+</div>
+
+            <ul>
+                <li>My City Events – Easy and clear</li>
+                <li>Local Fun – Short and catchy</li>
+                <li>City Meet – For all community gatherings</li>
+                <li>Event Spot – A place for all events</li>
+                <li>Town Connect – Connects people in the town</li>
+                <li>City Connect – Connects people in the city</li>
+
+            </ul>
+        </section>
+        <span style="color:red; font-weight:bold;">
+        <h2>Special Offers</h2>
+        <ul>
+            <li>Free Events</li>
+            <li>Member Discounts</li>
+            <li>Early Bird Tickets</li>
+            <li>Group Discounts</li>
+            <li>Special Events</li>
+        </ul>
+        </span>
+ <h2>Event Registration</h2>
+
+<form action="#" method="post">
+  <label for="name">Name:</label><br>
+  <input type="text" id="name" name="name" placeholder="Enter your full name" required autofocus><br><br>
+
+  <label for="email">Email:</label><br>
+  <input type="email" id="email" name="email" placeholder="example@mail.com" required><br><br>
+
+  <label for="date">Event Date:</label><br>
+  <input type="date" id="date" name="date" required><br><br>
+
+  <label for="eventType">Event Type:</label><br>
+  <select id="eventType" name="eventType" required>
+    <option value="" disabled selected>Select event type</option>
+    <option value="cultural">Cultural Fest</option>
+    <option value="cleanup">Clean-up Drive</option>
+    <option value="food">Food Fair</option>
+    <option value="bloodDonation">Blood Donation</option>
+    <option value="music">Music Night</option>
+    <option value="workshop">Tech Workshop</option>
+  </select><br><br>
+
+  <label for="message">Message:</label><br>
+  <textarea id="message" name="message" placeholder="Any special requests or comments"></textarea><br><br>
+
+  <button type="submit">Register</button>
+</form>
+
+<style>
+  form {
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 15px;
+    border: 2px solid #007BFF;
+    border-radius: 8px;
+    background-color: #f0f8ff;
+  }
+
+  label {
+    font-weight: bold;
+  }
+
+  input[type="text"], input[type="email"], input[type="date"], select, textarea {
+    width: 100%;
+    padding: 7px;
+    margin-top: 5px;
+    border: 1.5px solid #007BFF;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 14px;
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 60px;
+  }
+
+  button {
+    background-color: #007BFF;
+    color: white;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: #0056b3;
+  }
+</style>
+
+    <section class="feedback-section">
+        <h2>Event Feedback</h2>
+        <form id="feedbackForm">
+            <div class="form-group">
+                <label for="phone">Phone Number:</label>
+                <input type="tel" id="phone" placeholder="Enter phone number">
+                <div id="phoneError" class="error-message"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="eventFee">Event Fee:</label>
+                <select id="eventFee">
+                    <option value="">Select event</option>
+                    <option value="50">Basic ($50)</option>
+                    <option value="100">Advanced ($100)</option>
+                    <option value="150">Premium ($150)</option>
+                </select>
+                <div id="feeDisplay"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="feedback">Feedback:</label>
+                <textarea id="feedback" rows="4" placeholder="Enter your feedback"></textarea>
+                <div>Characters: <span id="charCount">0</span></div>
+            </div>
+
+            <button type="submit" id="submitBtn">Submit Feedback</button>
+        </form>
+    </section>
+
+    <section class="video-container">
+        <h2>Event Promo Video</h2>
+        <div class="video-wrapper">
+            <iframe 
+                id="eventVideo"
+                width="640" 
+                height="360" 
+                src="https://www.youtube.com/embed/u_qFlTu7HTw" 
+                title="Event Promo Video"
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+            </iframe>
+        </div>
+        <div id="videoStatus" class="video-status">Video ready to play!</div>
+    </section>
+
+    <section class="preferences-section">
+        <h2>User Preferences</h2>
+        <button id="clearPreferences">Clear Preferences</button>
+    </section>
+
+    <section class="geolocation-section">
+        <h2>Find Nearby Events</h2>
+        <button id="findNearbyEvents">Find Nearby Events</button>
+        <div id="coordinates" class="coordinates"></div>
+        <div id="geoError" class="error-message"></div>
+    </section>
+
+    <div class="overlay" id="overlay"></div>
+
+    <script>
+        console.log('Page loaded - Debug mode active');
+
+        document.getElementById('phone').onblur = function() {
+            console.log('Phone validation triggered');
+            const phone = this.value;
+            const phoneError = document.getElementById('phoneError');
+            const phoneRegex = /^\d{10}$/;
+            
+            console.log('Phone number:', phone);
+            console.log('Regex test result:', phoneRegex.test(phone));
+            
+            if (!phoneRegex.test(phone)) {
+                phoneError.textContent = 'Please enter a valid 10-digit phone number';
+                console.warn('Invalid phone number format');
+            } else {
+                phoneError.textContent = '';
+                console.log('Phone number validated successfully');
+            }
+        };
+
+        document.getElementById('eventFee').onchange = function() {
+            console.log('Event fee changed');
+            const feeDisplay = document.getElementById('feeDisplay');
+            const selectedFee = this.value;
+            
+            console.log('Selected fee:', selectedFee);
+            
+            if (selectedFee) {
+                feeDisplay.textContent = `Selected fee: $${selectedFee}`;
+                console.log('Fee display updated');
+            } else {
+                feeDisplay.textContent = '';
+                console.log('Fee display cleared');
+            }
+        };
+
+        document.getElementById('submitBtn').onclick = function(e) {
+            e.preventDefault();
+            console.log('Feedback form submitted');
+            alert('Thank you for your feedback! Your submission has been received.');
+        };
+
+        const eventImages = document.querySelectorAll('img');
+        const overlay = document.getElementById('overlay');
+        console.log('Found images:', eventImages.length);
+
+        eventImages.forEach((img, index) => {
+            img.ondblclick = function() {
+                console.log(`Image ${index} enlarged`);
+                this.classList.add('enlarged');
+                overlay.style.display = 'block';
+            };
+        });
+
+        overlay.onclick = function() {
+            console.log('Overlay clicked - closing enlarged image');
+            document.querySelector('.enlarged')?.classList.remove('enlarged');
+            overlay.style.display = 'none';
+        };
+
+        document.getElementById('feedback').onkeyup = function() {
+            const count = this.value.length;
+            document.getElementById('charCount').textContent = count;
+            console.log('Character count:', count);
+        };
+
+        const videoFrame = document.getElementById('eventVideo');
+        const videoStatus = document.getElementById('videoStatus');
+        console.log('Video element found:', !!videoFrame);
+
+        const eventType = document.getElementById('eventType');
+        console.log('Event type element found:', !!eventType);
+        
+        window.onload = function() {
+            console.log('Window loaded - checking localStorage');
+            const savedEventType = localStorage.getItem('preferredEventType');
+            console.log('Saved event type:', savedEventType);
+            
+            if (savedEventType) {
+                eventType.value = savedEventType;
+                console.log('Restored event type from localStorage');
+            }
+        };
+
+        eventType.onchange = function() {
+            console.log('Event type changed:', this.value);
+            localStorage.setItem('preferredEventType', this.value);
+        };
+
+        document.getElementById('clearPreferences').onclick = function() {
+            console.log('Clearing preferences');
+            localStorage.clear();
+            sessionStorage.clear();
+            eventType.value = '';
+            alert('All preferences have been cleared!');
+        };
+
+        document.getElementById('findNearbyEvents').onclick = function() {
+            console.log('Finding nearby events');
+            const options = {
+                enableHighAccuracy: true,
+                timeout: 5000,
+                maximumAge: 0
+            };
+
+            if (navigator.geolocation) {
+                console.log('Geolocation supported');
+                navigator.geolocation.getCurrentPosition(
+                    function(position) {
+                        console.log('Position obtained:', position.coords);
+                        const coords = document.getElementById('coordinates');
+                        coords.textContent = `Latitude: ${position.coords.latitude}\nLongitude: ${position.coords.longitude}`;
+                        document.getElementById('geoError').textContent = '';
+                    },
+                    function(error) {
+                        console.error('Geolocation error:', error);
+                        const errorMsg = document.getElementById('geoError');
+                        switch(error.code) {
+                            case error.PERMISSION_DENIED:
+                                errorMsg.textContent = 'Location access denied';
+                                break;
+                            case error.POSITION_UNAVAILABLE:
+                                errorMsg.textContent = 'Location information unavailable';
+                                break;
+                            case error.TIMEOUT:
+                                errorMsg.textContent = 'Location request timed out';
+                                break;
+                            default:
+                                errorMsg.textContent = 'An unknown error occurred';
+                        }
+                    },
+                    options
+                );
+            } else {
+                console.error('Geolocation not supported');
+                document.getElementById('geoError').textContent = 'Geolocation is not supported by your browser';
+            }
+        };
+
+        window.onbeforeunload = function(e) {
+            const feedback = document.getElementById('feedback').value;
+            if (feedback) {
+                console.log('Unsaved feedback detected');
+                return 'You have unsaved feedback. Are you sure you want to leave?';
+            }
+        };
+    </script>
+
+    <section id="contact">
+        <h2>Contact Information</h2>
+        <p>City Council Office</p>
+        <p>123 Main Street</p>
+        <p>City, State</p>
+        <p>Phone: (123) 456-7890</p>
+        <p>Email: QK4OY@example.com</p>
+    </section>
+    </main>
+    <footer>
+        <p>&copy; 2023 Your Company. All rights reserved.</p>
+    </footer>
+</body>
+</html>
