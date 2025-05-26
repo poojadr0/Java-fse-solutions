@@ -1,0 +1,408 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body and Typography */
+body {
+    font-family: system-ui, -apple-system, sans-serif;
+    line-height: 1.5;
+    padding: 0;
+    background: #f5f5f5;
+    margin: 0;
+}
+
+/* Main Content Container */
+main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+    background: white;
+    min-height: calc(100vh - 60px);
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+/* Section Styles */
+section {
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 1.5rem;
+    background: white;
+    border-radius: 0.5rem;
+}
+
+/* Header and Banner Styles */
+#welcomeBanner {
+    background: #2563eb;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+    margin-bottom: 0;
+}
+
+/* Navigation Styles */
+nav {
+    background: white;
+    padding: 0.5rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
+}
+
+nav a {
+    color: #4b5563;
+    text-decoration: none;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: color 0.2s ease;
+    border-bottom: 2px solid transparent;
+}
+
+nav a:hover {
+    color: #2563eb;
+    border-bottom-color: #2563eb;
+}
+
+nav a.active {
+    color: #2563eb;
+    border-bottom-color: #2563eb;
+}
+
+/* Highlight and Emphasis Styles */
+.highlight {
+    background: #fff3cd;
+    border-left: 4px solid #f59e0b;
+    padding: 0.5rem;
+    margin: 0.5rem 0;
+}
+
+/* Table Styles */
+table {
+    width: 100%;
+    margin: 1rem 0;
+    background: white;
+    border-collapse: collapse;
+}
+
+td {
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+}
+
+/* Image Styles */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Form Styles */
+.form-group {
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #374151;
+    font-weight: 500;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid #e5e7eb;
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    outline: none;
+}
+
+button {
+    background: #2563eb;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+button:hover {
+    background: #1d4ed8;
+    transform: translateY(-1px);
+}
+
+.error-message {
+    color: #dc2626;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+    display: block;
+}
+
+/* Form Layout */
+form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 1.5rem;
+    background: white;
+    border-radius: 0.5rem;
+}
+
+/* Form Success State */
+input:valid, select:valid, textarea:valid {
+    border-color: #059669;
+}
+
+/* Form Error State */
+input:invalid, select:invalid, textarea:invalid {
+    border-color: #dc2626;
+}
+
+/* Placeholder Styling */
+::placeholder {
+    color: #9ca3af;
+}
+
+/* Select Dropdown Styling */
+select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%236B7280'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 1.5em;
+    padding-right: 2.5rem;
+}
+
+/* Video Container Styles */
+.video-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+    padding-bottom: 45%;
+}
+
+.video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    max-width: 600px;
+}
+
+/* Geolocation Styles */
+.coordinates {
+    background: #f5f5f5;
+    padding: 0.5rem;
+    font-family: monospace;
+    margin: 0.5rem 0;
+}
+
+#geoError {
+    color: #dc2626;
+    font-size: 0.875rem;
+}
+
+/* Image Enlargement Styles */
+.enlarged {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 90vw;
+    max-height: 90vh;
+    z-index: 1000;
+}
+
+/* Footer Styles */
+footer {
+    text-align: center;
+    padding: 1rem;
+    margin-top: 2rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    main {
+        padding: 0.5rem;
+    }
+    
+    section {
+        padding: 1rem;
+        margin: 1rem auto;
+    }
+    
+    form {
+        padding: 1rem;
+    }
+    
+    nav ul {
+        gap: 1rem;
+    }
+    
+    nav a {
+        font-size: 0.75rem;
+        padding: 0.25rem;
+    }
+}
+
+/* Typography Styles */
+h1 {
+    color: #1a365d;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(45deg, #1a365d, #2563eb);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+h2 {
+    background: linear-gradient(to right, #2563eb, #1d4ed8);
+    color: white;
+    padding: 0.5rem;
+    border-radius: 4px;
+    margin: 1rem 0;
+}
+
+.special-heading {
+    color: #dc2626;
+    font-weight: 600;
+}
+
+/* Multi-column Layout */
+.news-article {
+    column-count: 2;
+    column-gap: 30px;
+    column-rule: 1px solid #ddd;
+    margin: 2rem 0;
+}
+
+/* Link Styles */
+a {
+    color: #2563eb;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #1d4ed8;
+}
+
+a:active {
+    color: #1e40af;
+}
+
+a:visited {
+    color: #7c3aed;
+}
+
+/* List Styles */
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin: 0.5rem 0;
+}
+
+/* Table Zebra Striping */
+tr:nth-child(even) {
+    background-color: #f9fafb;
+}
+
+/* Event Card Styles */
+.eventCard {
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 1rem 0;
+    background: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Responsive Typography */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2rem;
+    }
+    
+    h2 {
+        font-size: 1.5rem;
+    }
+    
+    p {
+        font-size: 0.875rem;
+    }
+    
+    .news-article {
+        column-count: 1;
+    }
+}
+
+/* Gallery Table Styles */
+.gallery-table {
+    max-width: 1000px;
+    margin: 2rem auto;
+    background: white;
+    border-collapse: collapse;
+}
+
+.gallery-table td {
+    padding: 1rem;
+    text-align: center;
+    vertical-align: top;
+    border: 1px solid #e5e7eb;
+}
+
+.gallery-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border: 3px solid #e5e7eb;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.gallery-img:hover {
+    transform: scale(1.05);
+}
+
+.gallery-table p {
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+    color: #4b5563;
+}
+
+/* Responsive Gallery */
+@media (max-width: 768px) {
+    .gallery-table td {
+        padding: 0.5rem;
+    }
+    
+    .gallery-img {
+        height: 150px;
+    }
+} 
