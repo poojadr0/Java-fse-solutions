@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Local Community Event Portal</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -17,7 +20,7 @@
             padding: 1rem;
             background: #f5f5f5;
         }
-
+        
         #welcomeBanner {
             background: #2563eb;
             color: white;
@@ -44,9 +47,9 @@
             border-left: 4px solid #f59e0b;
             padding: 0.5rem;
             margin: 0.5rem 0;
-        }
+    }
 
-        table {
+    table {
             width: 100%;
             margin: 1rem 0;
             background: white;
@@ -141,25 +144,526 @@
                 align-items: center;
             }
         }
+
+        /* Inline styles for specific elements */
+        h1 {
+            color: #1a365d;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .special-heading {
+            color: #dc2626;
+            font-weight: 600;
+        }
     </style>
 </head>
 <body>
-    <h1 style="text-align: center;">Find & Join Events Around You</h1>
     <div id="welcomeBanner">
-        <h1>Welcome to Local Community Event Portal</h1>
+        <h1>Welcome to Community Connect Hub</h1>
     </div>
     
-    <nav>
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="event">Event</a></li>
-            <li><a href="contact">Contact</a></li>
-            <li><a href="help.html" target="_blank">Help</a></li>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary py-3">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="bi bi-people-fill me-2"></i>Community Connect
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active px-3 py-2" href="#"><i class="bi bi-house-door me-1"></i>Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link px-3 py-2" href="#events"><i class="bi bi-calendar-event me-1"></i>Events</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link px-3 py-2" href="#volunteer"><i class="bi bi-person-badge me-1"></i>Volunteer</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link px-3 py-2" href="#contact"><i class="bi bi-envelope me-1"></i>Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link px-3 py-2" href="dashboard.html"><i class="bi bi-speedometer2 me-1"></i>Dashboard</a>
+                    </li>
         </ul>
+                <form class="d-flex ms-3">
+                    <div class="input-group">
+                        <input class="form-control" type="search" placeholder="Search events..." aria-label="Search">
+                        <button class="btn btn-light" type="submit">
+                            <i class="bi bi-search"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </nav>
+
+    <div class="container mb-4">
+        <ul class="nav nav-tabs" id="communityTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="upcoming-tab" data-bs-toggle="tab" data-bs-target="#upcoming" type="button" role="tab">Upcoming Events</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="past-tab" data-bs-toggle="tab" data-bs-target="#past" type="button" role="tab">Past Events</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="volunteer-tab" data-bs-toggle="tab" data-bs-target="#volunteer" type="button" role="tab">Volunteer</button>
+            </li>
+        </ul>
+        <div class="tab-content p-3 border border-top-0 rounded-bottom" id="communityTabsContent">
+            <div class="tab-pane fade show active" id="upcoming" role="tabpanel">
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Summer Festival</h5>
+                                <p class="card-text">Join us for the biggest community celebration</p>
+                                <span class="badge bg-primary">June 20-22</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Tech Workshop</h5>
+                                <p class="card-text">Learn coding and digital skills</p>
+                                <span class="badge bg-success">Every Monday</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Art Exhibition</h5>
+                                <p class="card-text">Showcase of local artists</p>
+                                <span class="badge bg-info">July 15</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="past" role="tabpanel">
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Spring Clean-up</h5>
+                                <p class="card-text">Community park maintenance</p>
+                                <span class="badge bg-secondary">Completed</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Food Drive</h5>
+                                <p class="card-text">Supporting local families</p>
+                                <span class="badge bg-secondary">Completed</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="volunteer" role="tabpanel">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Teaching Assistant</h5>
+                                <p class="card-text">Help with community education programs</p>
+                                <button class="btn btn-primary">Apply Now</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Event Support</h5>
+                                <p class="card-text">Help organize and run community events</p>
+                                <button class="btn btn-primary">Apply Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     
     <main>
-        <p>A local city council wants a lightweight, browser-based portal to help residents register for
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card shadow-sm mb-4">
+                        <div class="card-body">
+                            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
+                                <div class="text-center text-md-start mb-3 mb-md-0">
+                                    <h5 class="card-title mb-0">Community Event Calendar</h5>
+                                    <p class="text-muted mb-0">Stay updated with upcoming events</p>
+                                </div>
+                                <div class="d-flex gap-2">
+                                    <button class="btn btn-outline-primary">View Calendar</button>
+                                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createEventModal">
+                                        <i class="bi bi-plus-circle me-1"></i>Add Event
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Event Creation Modal -->
+            <div class="modal fade" id="createEventModal" tabindex="-1" aria-labelledby="createEventModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-centered">
+                    <div class="modal-content border-0 shadow-lg rounded-4 animate__animated animate__fadeInDown" style="overflow: hidden;">
+                        <div class="modal-header border-0 p-0" style="background: linear-gradient(90deg, #2563eb 60%, #60a5fa 100%); min-height: 110px; align-items: flex-start;">
+                            <div class="d-flex align-items-center w-100 p-4">
+                                <div id="modalIcon" class="me-4 fs-1 text-white"><i class="bi bi-calendar-plus"></i></div>
+                                <div>
+                                    <h5 class="modal-title fw-bold mb-1 text-white" id="createEventModalLabel">Create New Event</h5>
+                                    <small id="modalSubtitle" class="text-white-50">Fill in the details below to add a new event.</small>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-light btn-close position-absolute top-0 end-0 m-3 p-2 rounded-circle" data-bs-dismiss="modal" aria-label="Close" style="opacity:0.9;"></button>
+                        </div>
+                        <div class="modal-body bg-white p-5">
+                            <div class="progress mb-4" style="height: 6px;">
+                                <div class="progress-bar bg-primary" role="progressbar" style="width: 100%"></div>
+                            </div>
+                            <div id="modalSuccessMsg" class="alert alert-success d-none text-center animate__animated animate__fadeIn" role="alert">
+                                <div class="display-4 mb-2"><i class="bi bi-check-circle-fill text-success"></i></div>
+                                <div class="fs-5">Thank you! Your submission was received.</div>
+                                <div class="mt-2">We appreciate your involvement in the community.</div>
+                            </div>
+                            <form id="modalForm" autocomplete="off">
+                                <div class="row mb-4">
+                                    <div class="col-md-6 mb-3 mb-md-0">
+                                        <label for="eventName" class="form-label">Event Name</label>
+                                        <input type="text" class="form-control form-control-lg rounded-3" id="eventName" required aria-label="Event Name">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="eventDate" class="form-label">Event Date</label>
+                                        <input type="date" class="form-control form-control-lg rounded-3" id="eventDate" required aria-label="Event Date">
+                                    </div>
+                                </div>
+                                <div class="mb-4">
+                                    <label for="eventDescription" class="form-label">Description</label>
+                                    <textarea class="form-control form-control-lg rounded-3" id="eventDescription" rows="3" required aria-label="Description"></textarea>
+                                </div>
+                                <div class="row mb-4">
+                                    <div class="col-md-6 mb-3 mb-md-0">
+                                        <label for="eventLocation" class="form-label">Location</label>
+                                        <input type="text" class="form-control form-control-lg rounded-3" id="eventLocation" required aria-label="Location">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="eventCategory" class="form-label">Category</label>
+                                        <select class="form-select form-select-lg rounded-3" id="eventCategory" required aria-label="Category">
+                                            <option value="">Select category</option>
+                                            <option value="cultural">Cultural</option>
+                                            <option value="sports">Sports</option>
+                                            <option value="education">Education</option>
+                                            <option value="environment">Environment</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-end mt-4">
+                                    <button type="button" class="btn btn-outline-secondary btn-lg me-3 px-4" data-bs-dismiss="modal">Cancel</button>
+                                    <button type="submit" class="btn btn-primary btn-lg px-5">Submit</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card shadow-sm mb-4">
+                        <div class="card-body">
+                            <h3 class="display-4 text-center mb-4">Community News</h3>
+                            
+                            <div class="mb-4">
+                                <h2 class="display-6 fw-bold text-primary">Summer Festival 2024</h2>
+                                <p class="lead text-capitalize">join us for the biggest community celebration of the year</p>
+                                <p class="text-muted">June 20-22, 2024 | Central Park</p>
+                            </div>
+
+                            <div class="mb-4">
+                                <h3 class="fw-bold text-uppercase">Community Achievements</h3>
+                                <p class="text-lowercase">Our community has reached new heights in volunteer participation</p>
+                                <p class="text-muted fst-italic">Over 1000 volunteers registered this month</p>
+                            </div>
+
+                            <div class="mb-4">
+                                <h4 class="fw-light">Upcoming Workshops</h4>
+                                <p class="text-capitalize">discover new skills and connect with experts</p>
+                                <ul class="list-unstyled">
+                                    <li class="mb-2">
+                                        <span class="fw-bold">Digital Skills:</span>
+                                        <span class="text-muted">Every Monday</span>
+                                    </li>
+                                    <li class="mb-2">
+                                        <span class="fw-bold">Art & Craft:</span>
+                                        <span class="text-muted">Every Wednesday</span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="text-center">
+                                <p class="display-6 fw-light">Join Our Community</p>
+                                <p class="lead text-muted">Together we can make a difference</p>
+                                <button class="btn btn-primary btn-lg">Get Started</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h5 class="card-title mb-0">Recent Activities</h5>
+                                <span class="badge bg-success">Active</span>
+                            </div>
+                            <div class="d-flex flex-column gap-3">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h6 class="mb-0">Community Clean-up</h6>
+                                        <small class="text-muted">June 5, 2024</small>
+                                    </div>
+                                    <button class="btn btn-sm btn-outline-primary">Details</button>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h6 class="mb-0">Tech Workshop</h6>
+                                        <small class="text-muted">June 12, 2024</small>
+                                    </div>
+                                    <button class="btn btn-sm btn-outline-primary">Details</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h5 class="card-title mb-0">Volunteer Opportunities</h5>
+                                <span class="badge bg-info">New</span>
+                            </div>
+                            <div class="d-flex flex-column gap-3">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h6 class="mb-0">Food Drive</h6>
+                                        <small class="text-muted">June 8, 2024</small>
+                                    </div>
+                                    <button class="btn btn-sm btn-outline-success">Join</button>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h6 class="mb-0">Youth Mentoring</h6>
+                                        <small class="text-muted">June 15, 2024</small>
+                                    </div>
+                                    <button class="btn btn-sm btn-outline-success">Join</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Community Features</h5>
+                            <p class="card-text">Explore our community portal features and stay connected with local events.</p>
+                            <div class="d-flex gap-2">
+                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createEventModal" data-modal-title="Join Event" data-modal-icon="bi bi-calendar-event" data-modal-subtitle="Register for this event and be part of the excitement!">Join Event</button>
+                                <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#createEventModal" data-modal-title="Volunteer" data-modal-icon="bi bi-person-badge" data-modal-subtitle="Sign up to volunteer and make a difference!">Volunteer</button>
+                                <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#createEventModal" data-modal-title="Donate" data-modal-icon="bi bi-cash-coin" data-modal-subtitle="Support our community with your donation.">Donate</button>
+                                <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#createEventModal" data-modal-title="Report Issue" data-modal-icon="bi bi-exclamation-triangle" data-modal-subtitle="Let us know about any issues or concerns.">Report Issue</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Community Resources</h5>
+                            <p class="card-text">Access community resources and support services available to all members.</p>
+                            <div class="alert alert-info">
+                                <strong>New:</strong> Community Resource Center now open!
+                            </div>
+                            <div class="progress mb-3">
+                                <div class="progress-bar" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">75% Resources Available</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-5">
+                <div class="col-md-6">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <h3 class="card-title mb-4">Create Account</h3>
+                            <form>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="firstName" class="form-label">First Name</label>
+                                        <input type="text" class="form-control" id="firstName" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="lastName" class="form-label">Last Name</label>
+                                        <input type="text" class="form-control" id="lastName" required>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email Address</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text">@</span>
+                                        <input type="email" class="form-control" id="email" placeholder="name@example.com" required>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="password" class="form-label">Password</label>
+                                    <div class="input-group">
+                                        <input type="password" class="form-control" id="password" required>
+                                        <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="phone" class="form-label">Phone Number</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text">+1</span>
+                                        <input type="tel" class="form-control" id="phone" placeholder="(123) 456-7890">
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="newsletter">
+                                        <label class="form-check-label" for="newsletter">
+                                            Subscribe to community newsletter
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="terms" required>
+                                        <label class="form-check-label" for="terms">
+                                            I agree to the <a href="#">Terms and Conditions</a>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary w-100">Create Account</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <h3 class="card-title mb-4">Member Login</h3>
+                            <form>
+                                <div class="form-floating mb-3">
+                                    <input type="email" class="form-control" id="loginEmail" placeholder="name@example.com">
+                                    <label for="loginEmail">Email address</label>
+                                </div>
+
+                                <div class="form-floating mb-3">
+                                    <input type="password" class="form-control" id="loginPassword" placeholder="Password">
+                                    <label for="loginPassword">Password</label>
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="rememberMe">
+                                        <label class="form-check-label" for="rememberMe">
+                                            Remember me
+                                        </label>
+                                    </div>
+                                    <a href="#" class="text-decoration-none">Forgot password?</a>
+                                </div>
+
+                                <button type="submit" class="btn btn-success w-100">Sign In</button>
+
+                                <div class="text-center mt-3">
+                                    <p class="mb-0">Don't have an account? <a href="#" class="text-decoration-none">Sign up</a></p>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-5">
+                <div class="col-12">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <h3 class="card-title mb-4">Community Actions</h3>
+                            
+                            <div class="mb-4">
+                                <h4>Quick Actions</h4>
+                                <div class="d-flex flex-wrap gap-2 mb-3">
+                                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createEventModal" data-modal-title="Join Event" data-modal-icon="bi bi-calendar-event" data-modal-subtitle="Register for this event and be part of the excitement!">Join Event</button>
+                                    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#createEventModal" data-modal-title="Volunteer" data-modal-icon="bi bi-person-badge" data-modal-subtitle="Sign up to volunteer and make a difference!">Volunteer</button>
+                                    <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#createEventModal" data-modal-title="Donate" data-modal-icon="bi bi-cash-coin" data-modal-subtitle="Support our community with your donation.">Donate</button>
+                                    <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#createEventModal" data-modal-title="Report Issue" data-modal-icon="bi bi-exclamation-triangle" data-modal-subtitle="Let us know about any issues or concerns.">Report Issue</button>
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <h4>Event Categories</h4>
+                                <div class="d-flex flex-wrap gap-2 mb-3">
+                                    <button class="btn btn-outline-primary">Cultural</button>
+                                    <button class="btn btn-outline-primary">Sports</button>
+                                    <button class="btn btn-outline-primary">Education</button>
+                                    <button class="btn btn-outline-primary">Environment</button>
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <h4>Volunteer Opportunities</h4>
+                                <div class="d-flex flex-wrap gap-2 mb-3">
+                                    <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#createEventModal" data-modal-title="Become a Volunteer" data-modal-icon="bi bi-person-plus" data-modal-subtitle="Join our volunteer team and help the community!">Become a Volunteer</button>
+                                    <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#createEventModal" data-modal-title="Join Events" data-modal-icon="bi bi-calendar-check" data-modal-subtitle="Sign up for upcoming community events.">Join Events</button>
+                                    <button class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#createEventModal" data-modal-title="Donate" data-modal-icon="bi bi-cash-coin" data-modal-subtitle="Support our community with your donation.">Donate</button>
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <h4>Notification Preferences</h4>
+                                <div class="d-flex flex-wrap gap-2 mb-3">
+                                    <button class="btn btn-outline-info">Daily</button>
+                                    <button class="btn btn-outline-info">Weekly</button>
+                                    <button class="btn btn-outline-info">Monthly</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <p class="text-center">A local city council wants a lightweight, browser-based portal to help residents register for
 events, check locations, and access basic services.</p>
         
 <table>
@@ -193,9 +697,9 @@ events, check locations, and access basic services.</p>
     </td>
   </tr>
 </table>
+
         <section id="events">
              <h2>Upcoming Events</h2>
-
 <div class="event highlight">
   <h3>Annual Cultural Fest</h3>
   <p>Date: May 30, 2025 | Time: 6:00 PM</p>
@@ -208,322 +712,627 @@ events, check locations, and access basic services.</p>
 
 <div class="notice highlight">
   <p>Registrations close on May 28! Hurry up!</p>
+            </div>
+        </section>
+
+        <section class="video-container">
+            <h2>Event Promo Video</h2>
+            <div class="video-wrapper">
+                <iframe 
+                    id="eventVideo"
+                    width="640" 
+                    height="360" 
+                    src="https://www.youtube.com/embed/u_qFlTu7HTw" 
+                    title="Event Promo Video"
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+            <div id="videoStatus" class="video-status">Video ready to play!</div>
+        </section>
+
+        <section class="registration-section">
+            <h2 class="text-center mb-4">Join Our Community Events</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <h3 class="mb-3">Event Registration</h3>
+                    <form action="#" method="post" id="registrationForm">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Full Name:</label>
+                            <input type="text" id="name" name="name" class="form-control" placeholder="John Smith" required autofocus>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email Address:</label>
+                            <input type="email" id="email" name="email" class="form-control" placeholder="john.smith@email.com" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="date" class="form-label">Preferred Event Date:</label>
+                            <input type="date" id="date" name="date" class="form-control" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="eventType" class="form-label">Select Event:</label>
+                            <select id="eventType" name="eventType" class="form-select" required>
+                                <option value="" disabled selected>Choose an event</option>
+                                <option value="cultural">Summer Cultural Festival</option>
+                                <option value="cleanup">Beach Clean-up Drive</option>
+                                <option value="food">Local Food & Art Fair</option>
+                                <option value="workshop">Tech Skills Workshop</option>
+                                <option value="music">Community Music Night</option>
+                                <option value="garden">Urban Garden Project</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="message" class="form-label">Special Requirements:</label>
+                            <textarea id="message" name="message" class="form-control" placeholder="Any dietary restrictions, accessibility needs, or special requests" rows="3"></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100">Register Now</button>
+                    </form>
+                </div>
+
+                <div class="col-md-6">
+                    <h3 class="mb-3">Share Your Experience</h3>
+                    <form id="feedbackForm">
+                        <div class="mb-3">
+                            <label for="phone" class="form-label">Contact Number:</label>
+                            <input type="tel" id="phone" class="form-control" placeholder="(123) 456-7890">
+                            <div id="phoneError" class="form-text text-danger"></div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="eventFee" class="form-label">Event Category:</label>
+                            <select id="eventFee" class="form-select">
+                                <option value="">Select event category</option>
+                                <option value="50">Community Member ($50)</option>
+                                <option value="100">Family Package ($100)</option>
+                                <option value="150">VIP Experience ($150)</option>
+                            </select>
+                            <div id="feeDisplay" class="form-text"></div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="feedback" class="form-label">Your Feedback:</label>
+                            <textarea id="feedback" class="form-control" placeholder="Tell us about your experience, suggestions for improvement, or ideas for future events" rows="3"></textarea>
+                            <div class="form-text">Characters: <span id="charCount">0</span></div>
 </div>
 
-            <ul>
-                <li>My City Events – Easy and clear</li>
-                <li>Local Fun – Short and catchy</li>
-                <li>City Meet – For all community gatherings</li>
-                <li>Event Spot – A place for all events</li>
-                <li>Town Connect – Connects people in the town</li>
-                <li>City Connect – Connects people in the city</li>
-
-            </ul>
+                        <button type="submit" id="submitBtn" class="btn btn-success w-100">Submit Feedback</button>
+                    </form>
+                </div>
+            </div>
         </section>
-        <span style="color:red; font-weight:bold;">
-        <h2>Special Offers</h2>
-        <ul>
-            <li>Free Events</li>
-            <li>Member Discounts</li>
-            <li>Early Bird Tickets</li>
-            <li>Group Discounts</li>
-            <li>Special Events</li>
-        </ul>
-        </span>
- <h2>Event Registration</h2>
 
-<form action="#" method="post">
-  <label for="name">Name:</label><br>
-  <input type="text" id="name" name="name" placeholder="Enter your full name" required autofocus><br><br>
+        <section class="geolocation-section">
+            <h2>Find Nearby Events</h2>
+            <button id="findNearbyEvents">Find Nearby Events</button>
+            <div id="coordinates" class="coordinates"></div>
+            <div id="geoError" class="error-message"></div>
+        </section>
 
-  <label for="email">Email:</label><br>
-  <input type="email" id="email" name="email" placeholder="example@mail.com" required><br><br>
-
-  <label for="date">Event Date:</label><br>
-  <input type="date" id="date" name="date" required><br><br>
-
-  <label for="eventType">Event Type:</label><br>
-  <select id="eventType" name="eventType" required>
-    <option value="" disabled selected>Select event type</option>
-    <option value="cultural">Cultural Fest</option>
-    <option value="cleanup">Clean-up Drive</option>
-    <option value="food">Food Fair</option>
-    <option value="bloodDonation">Blood Donation</option>
-    <option value="music">Music Night</option>
-    <option value="workshop">Tech Workshop</option>
-  </select><br><br>
-
-  <label for="message">Message:</label><br>
-  <textarea id="message" name="message" placeholder="Any special requests or comments"></textarea><br><br>
-
-  <button type="submit">Register</button>
-</form>
-
-<style>
-  form {
-    max-width: 400px;
-    margin: 20px auto;
-    padding: 15px;
-    border: 2px solid #007BFF;
-    border-radius: 8px;
-    background-color: #f0f8ff;
-  }
-
-  label {
-    font-weight: bold;
-  }
-
-  input[type="text"], input[type="email"], input[type="date"], select, textarea {
-    width: 100%;
-    padding: 7px;
-    margin-top: 5px;
-    border: 1.5px solid #007BFF;
-    border-radius: 4px;
-    box-sizing: border-box;
-    font-size: 14px;
-  }
-
-  textarea {
-    resize: vertical;
-    min-height: 60px;
-  }
-
-  button {
-    background-color: #007BFF;
-    color: white;
-    padding: 10px 18px;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-  }
-
-  button:hover {
-    background-color: #0056b3;
-  }
-</style>
-
-    <section class="feedback-section">
-        <h2>Event Feedback</h2>
-        <form id="feedbackForm">
-            <div class="form-group">
-                <label for="phone">Phone Number:</label>
-                <input type="tel" id="phone" placeholder="Enter phone number">
-                <div id="phoneError" class="error-message"></div>
+        <!-- Bootstrap 5 Exercise Section -->
+        <section class="bootstrap-demo mt-5" style="background: #f8f9fa; padding: 2rem; border-radius: 8px;">
+            <h2 class="text-center mb-4">Bootstrap 5 Features Demo</h2>
+            
+            <div class="container mb-5">
+                <h3 class="text-center mb-4">Featured Programs</h3>
+                <div class="row g-4">
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">Community Events</h5>
+                                <p class="card-text">Join our vibrant community events and meet new people while having fun!</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="badge bg-primary">Upcoming</span>
+                                    <small class="text-muted">Next: June 15</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">Workshop Series</h5>
+                                <p class="card-text">Learn new skills through our hands-on workshops and training sessions.</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="badge bg-success">Active</span>
+                                    <small class="text-muted">Weekly</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">Volunteer Program</h5>
+                                <p class="card-text">Make a difference in your community by joining our volunteer initiatives.</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="badge bg-info">Open</span>
+                                    <small class="text-muted">Flexible Hours</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <div class="form-group">
-                <label for="eventFee">Event Fee:</label>
-                <select id="eventFee">
-                    <option value="">Select event</option>
-                    <option value="50">Basic ($50)</option>
-                    <option value="100">Advanced ($100)</option>
-                    <option value="150">Premium ($150)</option>
-                </select>
-                <div id="feeDisplay"></div>
+            <div class="container">
+                <div class="row mt-5">
+                    <div class="col-12">
+                        <h3 class="text-center mb-4">Community Dashboard</h3>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="card bg-light">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Quick Links</h5>
+                                        <ul class="list-unstyled">
+                                            <li class="mb-2"><a href="#" class="text-decoration-none">Upcoming Events</a></li>
+                                            <li class="mb-2"><a href="#" class="text-decoration-none">My Registrations</a></li>
+                                            <li class="mb-2"><a href="#" class="text-decoration-none">Community News</a></li>
+                                            <li class="mb-2"><a href="#" class="text-decoration-none">Volunteer Portal</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-9">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Welcome to Your Dashboard</h5>
+                                        <p class="card-text">Stay updated with the latest community events and activities. Your personalized dashboard helps you track your participation and discover new opportunities to get involved.</p>
+                                        <div class="alert alert-success">
+                                            <strong>Next Event:</strong> Community Clean-up Drive on June 5th
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-5">
+                    <div class="col-12">
+                        <h3 class="text-center mb-4">Community Services</h3>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div class="card text-center mb-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-calendar-alt mb-2" style="font-size: 2rem; color: #2563eb;"></i>
+                                        <h5 class="card-title">Event Planning</h5>
+                                        <p class="card-text">Organize and manage community events</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="card text-center mb-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-users mb-2" style="font-size: 2rem; color: #2563eb;"></i>
+                                        <h5 class="card-title">Volunteer Hub</h5>
+                                        <p class="card-text">Connect with volunteer opportunities</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="card text-center mb-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-bullhorn mb-2" style="font-size: 2rem; color: #2563eb;"></i>
+                                        <h5 class="card-title">Announcements</h5>
+                                        <p class="card-text">Stay informed with latest updates</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="card text-center mb-3">
+                                    <div class="card-body">
+                                        <i class="fas fa-hands-helping mb-2" style="font-size: 2rem; color: #2563eb;"></i>
+                                        <h5 class="card-title">Support</h5>
+                                        <p class="card-text">Get help and assistance</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-md-6 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Bootstrap Components</h5>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="list-group">
+                                            <a href="#" class="list-group-item list-group-item-action active">Active item</a>
+                                            <a href="#" class="list-group-item list-group-item-action">Second item</a>
+                                            <a href="#" class="list-group-item list-group-item-action">Third item</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="spinner-border text-primary" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
+                                        <div class="spinner-grow text-success" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="badge bg-primary">Primary</div>
+                                        <div class="badge bg-secondary">Secondary</div>
+                                        <div class="badge bg-success">Success</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-5">
+                        <div class="col-12">
+                            <h3 class="text-center mb-4">Featured Content</h3>
+                            <div class="row justify-content-center align-items-center min-vh-50 bg-light p-4 rounded">
+                                <div class="col-md-6 order-md-2">
+                                    <div class="card border-0 shadow-sm">
+                                        <div class="card-body text-center">
+                                            <h4 class="card-title">Community Spotlight</h4>
+                                            <p class="card-text">Discover the amazing stories and achievements of our community members.</p>
+                                            <button class="btn btn-primary">Learn More</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 order-md-1">
+                                    <div class="card border-0 shadow-sm">
+                                        <div class="card-body text-center">
+                                            <h4 class="card-title">Upcoming Events</h4>
+                                            <p class="card-text">Join us for exciting community gatherings and activities.</p>
+                                            <button class="btn btn-success">View Events</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                <div class="row mt-5">
+                    <div class="col-12">
+                        <h3 class="text-center mb-4">Community Highlights</h3>
+                        <div class="row justify-content-center align-items-center g-4">
+                            <div class="col-sm-6 col-md-4 order-md-3">
+                                <div class="card h-100">
+                                    <div class="card-body text-center">
+                                        <h5 class="card-title">Volunteer of the Month</h5>
+                                        <p class="card-text">Recognizing outstanding community service</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-4 order-md-1">
+                                <div class="card h-100">
+                                    <div class="card-body text-center">
+                                        <h5 class="card-title">Event Success</h5>
+                                        <p class="card-text">Recent community event highlights</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-4 order-md-2">
+                                <div class="card h-100">
+                                    <div class="card-body text-center">
+                                        <h5 class="card-title">Community Impact</h5>
+                                        <p class="card-text">Making a difference together</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-
-            <div class="form-group">
-                <label for="feedback">Feedback:</label>
-                <textarea id="feedback" rows="4" placeholder="Enter your feedback"></textarea>
-                <div>Characters: <span id="charCount">0</span></div>
-            </div>
-
-            <button type="submit" id="submitBtn">Submit Feedback</button>
-        </form>
-    </section>
-
-    <section class="video-container">
-        <h2>Event Promo Video</h2>
-        <div class="video-wrapper">
-            <iframe 
-                id="eventVideo"
-                width="640" 
-                height="360" 
-                src="https://www.youtube.com/embed/u_qFlTu7HTw" 
-                title="Event Promo Video"
-                frameborder="0" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                allowfullscreen>
-            </iframe>
         </div>
-        <div id="videoStatus" class="video-status">Video ready to play!</div>
-    </section>
-
-    <section class="preferences-section">
-        <h2>User Preferences</h2>
-        <button id="clearPreferences">Clear Preferences</button>
-    </section>
-
-    <section class="geolocation-section">
-        <h2>Find Nearby Events</h2>
-        <button id="findNearbyEvents">Find Nearby Events</button>
-        <div id="coordinates" class="coordinates"></div>
-        <div id="geoError" class="error-message"></div>
     </section>
 
     <div class="overlay" id="overlay"></div>
+</main>
 
-    <script>
-        console.log('Page loaded - Debug mode active');
+<section class="py-5">
+    <div class="container">
+        <h2 class="text-center mb-5">Featured Members</h2>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card shadow-lg rounded-pill">
+                    <div class="card-body text-center">
+                        <div class="position-relative d-inline-block mb-3">
+                            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a" 
+                                 class="rounded-circle border border-3 border-primary" 
+                                 alt="Member" 
+                                 style="width: 150px; height: 150px; object-fit: cover;">
+                            <span class="position-absolute top-0 end-0 badge rounded-pill bg-success p-2">Active</span>
+                        </div>
+                        <h5 class="card-title">John Smith</h5>
+                        <p class="card-text">Community Leader</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card shadow rounded-pill">
+                    <div class="card-body text-center">
+                        <div class="position-relative d-inline-block mb-3">
+                            <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e" 
+                                 class="rounded-circle border border-3 border-success" 
+                                 alt="Member" 
+                                 style="width: 150px; height: 150px; object-fit: cover;">
+                            <span class="position-absolute top-0 end-0 badge rounded-pill bg-warning p-2">New</span>
+                        </div>
+                        <h5 class="card-title">Sarah Johnson</h5>
+                        <p class="card-text">Event Organizer</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card shadow-sm rounded-pill">
+                    <div class="card-body text-center">
+                        <div class="position-relative d-inline-block mb-3">
+                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e" 
+                                 class="rounded-circle border border-3 border-info" 
+                                 alt="Member" 
+                                 style="width: 150px; height: 150px; object-fit: cover;">
+                            <span class="position-absolute top-0 end-0 badge rounded-pill bg-info p-2">Featured</span>
+                        </div>
+                        <h5 class="card-title">Michael Brown</h5>
+                        <p class="card-text">Volunteer Coordinator</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-        document.getElementById('phone').onblur = function() {
-            console.log('Phone validation triggered');
-            const phone = this.value;
-            const phoneError = document.getElementById('phoneError');
-            const phoneRegex = /^\d{10}$/;
-            
-            console.log('Phone number:', phone);
-            console.log('Regex test result:', phoneRegex.test(phone));
-            
-            if (!phoneRegex.test(phone)) {
-                phoneError.textContent = 'Please enter a valid 10-digit phone number';
-                console.warn('Invalid phone number format');
-            } else {
-                phoneError.textContent = '';
-                console.log('Phone number validated successfully');
-            }
-        };
+<div class="position-fixed bottom-0 start-0 w-100 bg-dark text-white py-3 d-none d-md-block">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <h5 class="mb-0">Join Our Community Today!</h5>
+            </div>
+            <div class="col-md-6 text-md-end">
+                <button class="btn btn-primary me-2">
+                    <i class="bi bi-person-plus-fill me-1"></i>Sign Up
+                </button>
+                <button class="btn btn-outline-light">
+                    <i class="bi bi-info-circle me-1"></i>Learn More
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 
-        document.getElementById('eventFee').onchange = function() {
-            console.log('Event fee changed');
-            const feeDisplay = document.getElementById('feeDisplay');
-            const selectedFee = this.value;
-            
-            console.log('Selected fee:', selectedFee);
-            
-            if (selectedFee) {
-                feeDisplay.textContent = `Selected fee: $${selectedFee}`;
-                console.log('Fee display updated');
-            } else {
-                feeDisplay.textContent = '';
-                console.log('Fee display cleared');
-            }
-        };
+<footer class="py-4 bg-dark text-white">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <h5>Community Connect</h5>
+                <p class="mb-0">Building stronger communities together</p>
+            </div>
+            <div class="col-md-4 text-center">
+                <h5>Connect With Us</h5>
+                <div class="d-flex justify-content-center gap-3 mt-3">
+                    <a href="#" class="text-white fs-4"><i class="bi bi-facebook"></i></a>
+                    <a href="#" class="text-white fs-4"><i class="bi bi-twitter-x"></i></a>
+                    <a href="#" class="text-white fs-4"><i class="bi bi-instagram"></i></a>
+                    <a href="#" class="text-white fs-4"><i class="bi bi-linkedin"></i></a>
+                    <a href="#" class="text-white fs-4"><i class="bi bi-youtube"></i></a>
+                </div>
+            </div>
+            <div class="col-md-4 text-md-end">
+                <h5>Quick Actions</h5>
+                <div class="d-flex justify-content-md-end gap-2 mt-3">
+                    <button class="btn btn-outline-light btn-sm">
+                        <i class="bi bi-envelope"></i>
+                    </button>
+                    <button class="btn btn-outline-light btn-sm">
+                        <i class="bi bi-telephone"></i>
+                    </button>
+                    <button class="btn btn-outline-light btn-sm">
+                        <i class="bi bi-geo-alt"></i>
+                    </button>
+                    <button class="btn btn-outline-light btn-sm">
+                        <i class="bi bi-share"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <hr class="my-4">
+        <div class="row">
+            <div class="col-md-6">
+                <p class="mb-0">&copy; 2024 Community Connect. All rights reserved.</p>
+            </div>
+            <div class="col-md-6 text-md-end">
+                <a href="#" class="text-white me-3"><i class="bi bi-shield-check me-1"></i>Privacy Policy</a>
+                <a href="#" class="text-white me-3"><i class="bi bi-file-text me-1"></i>Terms of Service</a>
+                <a href="#" class="text-white"><i class="bi bi-question-circle me-1"></i>Help</a>
+            </div>
+        </div>
+    </div>
+</footer>
 
-        document.getElementById('submitBtn').onclick = function(e) {
-            e.preventDefault();
-            console.log('Feedback form submitted');
-            alert('Thank you for your feedback! Your submission has been received.');
-        };
+<script>
+    console.log('Page loaded - Debug mode active');
 
-        const eventImages = document.querySelectorAll('img');
-        const overlay = document.getElementById('overlay');
-        console.log('Found images:', eventImages.length);
+    // Initialize Bootstrap tooltips
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+    });
 
-        eventImages.forEach((img, index) => {
-            img.ondblclick = function() {
-                console.log(`Image ${index} enlarged`);
-                this.classList.add('enlarged');
-                overlay.style.display = 'block';
-            };
-        });
-
-        overlay.onclick = function() {
-            console.log('Overlay clicked - closing enlarged image');
-            document.querySelector('.enlarged')?.classList.remove('enlarged');
-            overlay.style.display = 'none';
-        };
-
-        document.getElementById('feedback').onkeyup = function() {
-            const count = this.value.length;
-            document.getElementById('charCount').textContent = count;
-            console.log('Character count:', count);
-        };
-
-        const videoFrame = document.getElementById('eventVideo');
-        const videoStatus = document.getElementById('videoStatus');
-        console.log('Video element found:', !!videoFrame);
-
-        const eventType = document.getElementById('eventType');
-        console.log('Event type element found:', !!eventType);
+    document.getElementById('phone').onblur = function() {
+        console.log('Phone validation triggered');
+        const phone = this.value;
+        const phoneError = document.getElementById('phoneError');
+        const phoneRegex = /^\d{10}$/;
         
-        window.onload = function() {
-            console.log('Window loaded - checking localStorage');
-            const savedEventType = localStorage.getItem('preferredEventType');
-            console.log('Saved event type:', savedEventType);
-            
-            if (savedEventType) {
-                eventType.value = savedEventType;
-                console.log('Restored event type from localStorage');
+        console.log('Phone number:', phone);
+        console.log('Regex test result:', phoneRegex.test(phone));
+        
+        if (!phoneRegex.test(phone)) {
+            phoneError.textContent = 'Please enter a valid 10-digit phone number';
+            console.warn('Invalid phone number format');
+        } else {
+            phoneError.textContent = '';
+            console.log('Phone number validated successfully');
+        }
+    };
+
+    document.getElementById('eventFee').onchange = function() {
+        console.log('Event fee changed');
+        const feeDisplay = document.getElementById('feeDisplay');
+        const selectedFee = this.value;
+        
+        console.log('Selected fee:', selectedFee);
+        
+        if (selectedFee) {
+            feeDisplay.textContent = `Selected fee: $${selectedFee}`;
+            console.log('Fee display updated');
+        } else {
+            feeDisplay.textContent = '';
+            console.log('Fee display cleared');
+        }
+    };
+
+    document.getElementById('submitBtn').onclick = function(e) {
+        e.preventDefault();
+        console.log('Feedback form submitted');
+        alert('Thank you for your feedback! Your submission has been received.');
+    };
+
+    const eventImages = document.querySelectorAll('img');
+    const overlay = document.getElementById('overlay');
+    console.log('Found images:', eventImages.length);
+
+    eventImages.forEach((img, index) => {
+        img.ondblclick = function() {
+            console.log(`Image ${index} enlarged`);
+            this.classList.add('enlarged');
+            overlay.style.display = 'block';
+        };
+    });
+
+    overlay.onclick = function() {
+        console.log('Overlay clicked - closing enlarged image');
+        document.querySelector('.enlarged')?.classList.remove('enlarged');
+        overlay.style.display = 'none';
+    };
+
+    document.getElementById('feedback').onkeyup = function() {
+        const count = this.value.length;
+        document.getElementById('charCount').textContent = count;
+        console.log('Character count:', count);
+    };
+
+    const videoFrame = document.getElementById('eventVideo');
+    const videoStatus = document.getElementById('videoStatus');
+    console.log('Video element found:', !!videoFrame);
+
+    const eventType = document.getElementById('eventType');
+    console.log('Event type element found:', !!eventType);
+    
+    window.onload = function() {
+        console.log('Window loaded - checking localStorage');
+        const savedEventType = localStorage.getItem('preferredEventType');
+        console.log('Saved event type:', savedEventType);
+        
+        if (savedEventType) {
+            eventType.value = savedEventType;
+            console.log('Restored event type from localStorage');
+        }
+    };
+
+    eventType.onchange = function() {
+        console.log('Event type changed:', this.value);
+        localStorage.setItem('preferredEventType', this.value);
+    };
+
+    document.getElementById('clearPreferences').onclick = function() {
+        console.log('Clearing preferences');
+        localStorage.clear();
+        sessionStorage.clear();
+        eventType.value = '';
+        alert('All preferences have been cleared!');
+    };
+
+    document.getElementById('findNearbyEvents').onclick = function() {
+        console.log('Finding nearby events');
+        const options = {
+            enableHighAccuracy: true,
+            timeout: 5000,
+            maximumAge: 0
+        };
+
+        if (navigator.geolocation) {
+            console.log('Geolocation supported');
+            navigator.geolocation.getCurrentPosition(
+                function(position) {
+                    console.log('Position obtained:', position.coords);
+                    const coords = document.getElementById('coordinates');
+                    coords.textContent = `Latitude: ${position.coords.latitude}\nLongitude: ${position.coords.longitude}`;
+                    document.getElementById('geoError').textContent = '';
+                },
+                function(error) {
+                    console.error('Geolocation error:', error);
+                    const errorMsg = document.getElementById('geoError');
+                    switch(error.code) {
+                        case error.PERMISSION_DENIED:
+                            errorMsg.textContent = 'Location access denied';
+                            break;
+                        case error.POSITION_UNAVAILABLE:
+                            errorMsg.textContent = 'Location information unavailable';
+                            break;
+                        case error.TIMEOUT:
+                            errorMsg.textContent = 'Location request timed out';
+                            break;
+                        default:
+                            errorMsg.textContent = 'An unknown error occurred';
+                    }
+                },
+                options
+            );
+        } else {
+            console.error('Geolocation not supported');
+            document.getElementById('geoError').textContent = 'Geolocation is not supported by your browser';
+        }
+    };
+
+    window.onbeforeunload = function(e) {
+        const feedback = document.getElementById('feedback').value;
+        if (feedback) {
+            console.log('Unsaved feedback detected');
+            return 'You have unsaved feedback. Are you sure you want to leave?';
+        }
+    };
+
+    // Modal dynamic content handler
+    const createEventModal = document.getElementById('createEventModal');
+    if (createEventModal) {
+        createEventModal.addEventListener('show.bs.modal', function (event) {
+            const button = event.relatedTarget;
+            if (button) {
+                const title = button.getAttribute('data-modal-title') || 'Create New Event';
+                const icon = button.getAttribute('data-modal-icon') || 'bi bi-calendar-plus';
+                const subtitle = button.getAttribute('data-modal-subtitle') || 'Fill in the details below to add a new event.';
+                document.getElementById('createEventModalLabel').textContent = title;
+                document.getElementById('modalIcon').innerHTML = `<i class="${icon}"></i>`;
+                document.getElementById('modalSubtitle').textContent = subtitle;
             }
+            document.getElementById('modalSuccessMsg').classList.add('d-none');
+            document.getElementById('modalForm').reset();
+        });
+        document.getElementById('modalForm').onsubmit = function(e) {
+            e.preventDefault();
+            document.getElementById('modalSuccessMsg').classList.remove('d-none');
+            setTimeout(() => {
+                const modal = bootstrap.Modal.getInstance(createEventModal);
+                modal.hide();
+            }, 1500);
         };
-
-        eventType.onchange = function() {
-            console.log('Event type changed:', this.value);
-            localStorage.setItem('preferredEventType', this.value);
-        };
-
-        document.getElementById('clearPreferences').onclick = function() {
-            console.log('Clearing preferences');
-            localStorage.clear();
-            sessionStorage.clear();
-            eventType.value = '';
-            alert('All preferences have been cleared!');
-        };
-
-        document.getElementById('findNearbyEvents').onclick = function() {
-            console.log('Finding nearby events');
-            const options = {
-                enableHighAccuracy: true,
-                timeout: 5000,
-                maximumAge: 0
-            };
-
-            if (navigator.geolocation) {
-                console.log('Geolocation supported');
-                navigator.geolocation.getCurrentPosition(
-                    function(position) {
-                        console.log('Position obtained:', position.coords);
-                        const coords = document.getElementById('coordinates');
-                        coords.textContent = `Latitude: ${position.coords.latitude}\nLongitude: ${position.coords.longitude}`;
-                        document.getElementById('geoError').textContent = '';
-                    },
-                    function(error) {
-                        console.error('Geolocation error:', error);
-                        const errorMsg = document.getElementById('geoError');
-                        switch(error.code) {
-                            case error.PERMISSION_DENIED:
-                                errorMsg.textContent = 'Location access denied';
-                                break;
-                            case error.POSITION_UNAVAILABLE:
-                                errorMsg.textContent = 'Location information unavailable';
-                                break;
-                            case error.TIMEOUT:
-                                errorMsg.textContent = 'Location request timed out';
-                                break;
-                            default:
-                                errorMsg.textContent = 'An unknown error occurred';
-                        }
-                    },
-                    options
-                );
-            } else {
-                console.error('Geolocation not supported');
-                document.getElementById('geoError').textContent = 'Geolocation is not supported by your browser';
-            }
-        };
-
-        window.onbeforeunload = function(e) {
-            const feedback = document.getElementById('feedback').value;
-            if (feedback) {
-                console.log('Unsaved feedback detected');
-                return 'You have unsaved feedback. Are you sure you want to leave?';
-            }
-        };
-    </script>
-
-    <section id="contact">
-        <h2>Contact Information</h2>
-        <p>City Council Office</p>
-        <p>123 Main Street</p>
-        <p>City, State</p>
-        <p>Phone: (123) 456-7890</p>
-        <p>Email: QK4OY@example.com</p>
-    </section>
-    </main>
-    <footer>
-        <p>&copy; 2023 Your Company. All rights reserved.</p>
-    </footer>
+    }
+</script>
 </body>
 </html>
