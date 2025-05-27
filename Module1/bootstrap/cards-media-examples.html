@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap Cards and Media Examples</title>
+    
+    <!-- Bootstrap 5 CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <style>
+        .example-section {
+            margin: 2rem 0;
+            padding: 2rem;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+        }
+        .card-img-top {
+            height: 200px;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <!-- Exercise 11.1: Profile Card -->
+        <div class="example-section">
+            <h2 class="mb-4">Exercise 11.1: Profile Card</h2>
+            
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" 
+                             class="card-img-top" alt="Chef Profile">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Chef John Smith</h5>
+                            <p class="card-text text-muted">Head Chef</p>
+                            <p class="card-text">Specializing in Mediterranean cuisine with over 15 years of experience.</p>
+                            <div class="d-flex justify-content-center gap-2">
+                                <a href="#" class="btn btn-primary"><i class="fab fa-linkedin"></i></a>
+                                <a href="#" class="btn btn-info"><i class="fab fa-twitter"></i></a>
+                                <a href="#" class="btn btn-danger"><i class="fab fa-instagram"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Exercise 11.2: Media Objects -->
+        <div class="example-section">
+            <h2 class="mb-4">Exercise 11.2: Media Objects</h2>
+            
+            <div class="d-flex mb-4">
+                <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" 
+                     class="rounded me-3" style="width: 100px; height: 100px; object-fit: cover;" alt="Restaurant">
+                <div>
+                    <h5>Our Restaurant</h5>
+                    <p>Experience fine dining at its best. Our restaurant offers a unique blend of traditional and modern cuisine.</p>
+                </div>
+            </div>
+
+            <div class="d-flex mb-4">
+                <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" 
+                     class="rounded me-3" style="width: 100px; height: 100px; object-fit: cover;" alt="Signature Dish">
+                <div>
+                    <h5>Signature Dish</h5>
+                    <p>Our award-winning signature dish combines fresh local ingredients with innovative cooking techniques.</p>
+                </div>
+            </div>
+
+            <div class="d-flex">
+                <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" 
+                     class="rounded me-3" style="width: 100px; height: 100px; object-fit: cover;" alt="Chef's Special">
+                <div>
+                    <h5>Chef's Special</h5>
+                    <p>Try our chef's special menu, featuring seasonal ingredients and creative culinary combinations.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> 

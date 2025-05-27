@@ -3,193 +3,371 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Local Community Event Portal</title>
-    <!-- Embedded Styles -->
-    <style>
-        body {
-            background-color: #f5f5f5;
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-        }
-    </style>
-    <!-- External Stylesheets -->
-    <link rel="stylesheet" href="../css/styles.css">
-    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <script src="../bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="../js/main.js" defer></script>
+    <title>Delicious Bites - Food Website</title>
+    
+    <!-- Bootstrap 5 CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Local Bootstrap CSS (for Exercise 1.2) -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link href="css/custom.css" rel="stylesheet">
 </head>
 <body>
-    <div id="welcomeBanner">
-        <h1>Welcome to the Local Community Event Portal</h1>
-        <p>Discover and share events in your community!</p>
-        <p>Special Offer: <span style="color: red; font-weight: bold;">First event registration is free!</span></p>
-    </div>
-
-    <nav>
-        <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#events">Events</a></li>
-            <li><a href="#contact">Contact</a></li>
-            <li><a href="help.html" target="_blank">Help</a></li>
-        </ul>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">Delicious Bites</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Menu</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Reservations</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </nav>
 
-    <main>
-        <section id="events">
-            <h2>Upcoming Events</h2>
-            <div class="highlight">
-                <p>New events are added daily! Check back often for updates.</p>
+    <!-- Hero Section -->
+    <div class="hero-section text-center py-5">
+        <div class="container">
+            <h1 class="display-4">Welcome to Delicious Bites</h1>
+            <p class="lead">Experience the finest culinary delights</p>
+            <button class="btn btn-primary btn-lg">View Menu</button>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container my-5">
+        <div class="row">
+            <!-- Featured Dishes -->
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">Today's Specials</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="dish-item">
+                            <h6>Grilled Salmon</h6>
+                            <p>Fresh Atlantic salmon with lemon herb butter</p>
+                            <span class="price">$24.99</span>
+                        </div>
+                        <div class="dish-item">
+                            <h6>Beef Tenderloin</h6>
+                            <p>Premium cut with red wine reduction</p>
+                            <span class="price">$29.99</span>
+                        </div>
+                        <button class="btn btn-primary">Order Now</button>
+                    </div>
+                </div>
             </div>
-            <table>
-                <tr>
-                    <td>Community Cleanup</td>
-                    <td>March 15, 2024</td>
-                    <td>Free</td>
-                </tr>
-                <tr>
-                    <td>Local Art Exhibition</td>
-                    <td>March 20, 2024</td>
-                    <td>$10</td>
-                </tr>
-            </table>
-        </section>
 
-        <section id="create">
-            <h2>Create New Event</h2>
-            <form id="eventForm" novalidate>
-                <div class="form-group">
-                    <label for="eventName">Event Name</label>
-                    <input type="text" id="eventName" name="eventName" required 
-                           placeholder="Enter event name" autocomplete="off">
+            <!-- Restaurant Info -->
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">Restaurant Information</h5>
+                    </div>
+                    <div class="card-body">
+                        <p>Open Hours: 11:00 AM - 10:00 PM</p>
+                        <p>Location: 123 Food Street, Cuisine City</p>
+                        <p>Phone: (555) 123-4567</p>
+                        <button class="btn btn-success">Make Reservation</button>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="eventDate">Event Date</label>
-                    <input type="date" id="eventDate" name="eventDate" required>
-                </div>
-                <div class="form-group">
-                    <label for="eventFee">Event Fee</label>
-                    <select id="eventFee" name="eventFee" required>
-                        <option value="">Select Fee</option>
-                        <option value="0">Free</option>
-                        <option value="5">$5</option>
-                        <option value="10">$10</option>
-                        <option value="20">$20</option>
-                    </select>
-                    <span id="feeDisplay" class="error-message"></span>
-                </div>
-                <button type="submit">Create Event</button>
-            </form>
-        </section>
-
-        <section id="feedback">
-            <h2>Feedback</h2>
-            <form id="feedbackForm" novalidate>
-                <div class="form-group">
-                    <label for="name">Your Name</label>
-                    <input type="text" id="name" name="name" required 
-                           placeholder="Enter your name" autocomplete="name">
-                </div>
-                <div class="form-group">
-                    <label for="phone">Phone Number</label>
-                    <input type="tel" id="phone" name="phone" required 
-                           placeholder="Enter your phone number" pattern="[0-9]{10}"
-                           autocomplete="tel">
-                    <span id="phoneError" class="error-message"></span>
-                </div>
-                <div class="form-group">
-                    <label for="feedback">Your Feedback</label>
-                    <textarea id="feedback" name="feedback" rows="4" required 
-                              placeholder="Share your thoughts..."></textarea>
-                    <small>Character count: <span id="charCount">0</span></small>
-                </div>
-                <button type="submit">Submit Feedback</button>
-            </form>
-        </section>
-
-        <section id="media">
-            <h2>Event Gallery</h2>
-            <table class="gallery-table">
-                <tr>
-                    <td>
-                        <img src="https://www.rannutsavonline.com/blog/wp-content/uploads/2024/12/new-year-at-Rann-utsav-2025-830x474.webp" alt="Community Cleanup Event" title="Annual Community Cleanup" class="gallery-img">
-                        <p>Annual Community Cleanup - March 2024</p>
-                    </td>
-                    <td>
-                        <img src="https://us.123rf.com/450wm/jemastock/jemastock1904/jemastock190433313/123070635-park-cleaning-volunteers-with-trash-can-and-bags-cartoons-vector-illustration-graphic-design.jpg?ver=6" alt="Art Exhibition" title="Local Art Exhibition" class="gallery-img">
-                        <p>Local Art Exhibition - March 2024</p>
-                    </td>
-                    <td>
-                        <img src="https://img.freepik.com/premium-photo/free-photo-food-truck-city-festival-selective-focus_1041666-28178.jpg" alt="Example Image" alt="Food Festival" title="Community Food Festival" class="gallery-img">
-                        <p>Community Food Festival - April 2024</p>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <img src="https://media.istockphoto.com/id/1033906526/vector/donate-blood-concept-with-blood-bag-and-heart-blood-donation-vector-illustration-world-blood.jpg?s=612x612&w=0&k=20&c=bCDDE6DiGdlFspMA1RKRNeLBUWugSmi8U73ZCfYSbpg=" alt="Sports Day" title="Annual Sports Day" class="gallery-img">
-                        <p>Annual Sports Day - April 2024</p>
-                    </td>
-                    <td>
-                        <img src="https://img.freepik.com/free-photo/3d-music-related-scene_23-2151125037.jpg?semt=ais_hybrid&w=740" alt="Example Image" alt="Music Concert" title="Summer Music Concert" class="gallery-img">
-                        <p>Summer Music Concert - May 2024</p>
-                    </td>
-                    <td>
-                        <img src="https://images.stockcake.com/public/f/e/5/fe563b8b-8a5a-4346-8fc1-4187d1a05a1e_large/high-tech-workshop-activity-stockcake.jpg" alt="Book Fair" title="Community Book Fair" class="gallery-img">
-                        <p>Community Book Fair - May 2024</p>
-                    </td>
-                </tr>
-            </table>
-            <div class="video-wrapper">
-                <iframe id="eventVideo" src="https://www.youtube.com/embed/u_qFlTu7HTw" frameborder="0" allowfullscreen></iframe>
             </div>
-            <p id="videoStatus">Video loading...</p>
-        </section>
+        </div>
 
-        <section id="location">
-            <h2>Find Events Near You</h2>
-            <button id="findNearbyEvents">Find Nearby Events</button>
-            <pre id="coordinates" class="coordinates"></pre>
-            <p id="geoError"></p>
-        </section>
-
-        <section id="preferences">
-            <h2>Your Preferences</h2>
-            <div class="form-group">
-                <label for="eventType">Preferred Event Type:</label>
-                <select id="eventType">
-                    <option value="">Select Type</option>
-                    <option value="arts">Arts & Culture</option>
-                    <option value="sports">Sports</option>
-                    <option value="food">Food & Drink</option>
-                </select>
-            </div>
-            <button id="clearPreferences">Clear Preferences</button>
-        </section>
-    </main>
-
-    <div id="overlay" style="display: none;"></div>
-
-    <!-- Modal -->
-    <div class="modal fade" id="createEventModal" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="createEventModalLabel">Create New Event</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <div id="modalIcon"></div>
-                    <p id="modalSubtitle"></p>
-                    <form id="modalForm">
-                        <!-- Form content -->
-                    </form>
-                    <div id="modalSuccessMsg" class="d-none">Event created successfully!</div>
+        <!-- Menu Categories -->
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">Menu Categories</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="p-3 bg-light rounded">
+                                    <h6>Appetizers</h6>
+                                    <p>Start your meal right</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="p-3 bg-light rounded">
+                                    <h6>Main Courses</h6>
+                                    <p>Signature dishes</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="p-3 bg-light rounded">
+                                    <h6>Desserts</h6>
+                                    <p>Sweet endings</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <footer>
-        <p>&copy; 2024 Local Community Event Portal. All rights reserved.</p>
+    <!-- Responsive Grid Demo Section -->
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">Responsive Grid Demo</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <!-- Column 1 -->
+                            <div class="col-12 col-md-6 col-lg-4 mb-4">
+                                <div class="p-4 bg-primary text-white rounded">
+                                    <h4>Column 1</h4>
+                                    <p>This column will:</p>
+                                    <ul>
+                                        <li>Stack vertically on mobile (full width)</li>
+                                        <li>Show 2 per row on tablets</li>
+                                        <li>Show 3 per row on desktops</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <!-- Column 2 -->
+                            <div class="col-12 col-md-6 col-lg-4 mb-4">
+                                <div class="p-4 bg-success text-white rounded">
+                                    <h4>Column 2</h4>
+                                    <p>This column will:</p>
+                                    <ul>
+                                        <li>Stack vertically on mobile (full width)</li>
+                                        <li>Show 2 per row on tablets</li>
+                                        <li>Show 3 per row on desktops</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <!-- Column 3 -->
+                            <div class="col-12 col-md-6 col-lg-4 mb-4">
+                                <div class="p-4 bg-info text-white rounded">
+                                    <h4>Column 3</h4>
+                                    <p>This column will:</p>
+                                    <ul>
+                                        <li>Stack vertically on mobile (full width)</li>
+                                        <li>Show 2 per row on tablets</li>
+                                        <li>Show 3 per row on desktops</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Two Column Layout with Sidebar -->
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">Recipe of the Week</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <!-- Sidebar -->
+                            <div class="col-md-3">
+                                <div class="p-3 bg-light rounded">
+                                    <h6>Recipe Categories</h6>
+                                    <ul class="list-unstyled">
+                                        <li class="mb-2"><a href="#" class="text-decoration-none">Breakfast</a></li>
+                                        <li class="mb-2"><a href="#" class="text-decoration-none">Lunch</a></li>
+                                        <li class="mb-2"><a href="#" class="text-decoration-none">Dinner</a></li>
+                                        <li class="mb-2"><a href="#" class="text-decoration-none">Desserts</a></li>
+                                        <li class="mb-2"><a href="#" class="text-decoration-none">Beverages</a></li>
+                                    </ul>
+                                    <hr>
+                                    <h6>Popular Recipes</h6>
+                                    <ul class="list-unstyled">
+                                        <li class="mb-2"><a href="#" class="text-decoration-none">Pasta Carbonara</a></li>
+                                        <li class="mb-2"><a href="#" class="text-decoration-none">Chicken Curry</a></li>
+                                        <li class="mb-2"><a href="#" class="text-decoration-none">Chocolate Cake</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <!-- Main Content -->
+                            <div class="col-md-9">
+                                <div class="p-3">
+                                    <h4>Classic Beef Wellington</h4>
+                                    <img src="https://images.unsplash.com/photo-1544025162-d76694265947" class="img-fluid rounded mb-3" alt="Beef Wellington">
+                                    <p class="lead">A luxurious dish perfect for special occasions</p>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h6>Ingredients:</h6>
+                                            <ul>
+                                                <li>2 lbs beef tenderloin</li>
+                                                <li>1 lb puff pastry</li>
+                                                <li>8 oz mushrooms</li>
+                                                <li>2 shallots</li>
+                                                <li>2 tbsp Dijon mustard</li>
+                                                <li>Fresh herbs</li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h6>Preparation Time:</h6>
+                                            <p>2 hours</p>
+                                            <h6>Difficulty Level:</h6>
+                                            <p>Advanced</p>
+                                            <button class="btn btn-primary">View Full Recipe</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Four Column Equal Width Layout -->
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">Food Categories</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <!-- Category 1 -->
+                            <div class="col-sm-3 mb-4">
+                                <div class="p-3 bg-light rounded text-center">
+                                    <i class="fas fa-utensils fa-2x mb-2"></i>
+                                    <h6>Italian Cuisine</h6>
+                                    <p class="small">Pasta, Pizza, Risotto</p>
+                                    <button class="btn btn-sm btn-outline-primary">Explore</button>
+                                </div>
+                            </div>
+                            
+                            <!-- Category 2 -->
+                            <div class="col-sm-3 mb-4">
+                                <div class="p-3 bg-light rounded text-center">
+                                    <i class="fas fa-fish fa-2x mb-2"></i>
+                                    <h6>Seafood</h6>
+                                    <p class="small">Fish, Shellfish, Sushi</p>
+                                    <button class="btn btn-sm btn-outline-primary">Explore</button>
+                                </div>
+                            </div>
+                            
+                            <!-- Category 3 -->
+                            <div class="col-sm-3 mb-4">
+                                <div class="p-3 bg-light rounded text-center">
+                                    <i class="fas fa-drumstick-bite fa-2x mb-2"></i>
+                                    <h6>Grilled Meats</h6>
+                                    <p class="small">Steaks, BBQ, Kebabs</p>
+                                    <button class="btn btn-sm btn-outline-primary">Explore</button>
+                                </div>
+                            </div>
+                            
+                            <!-- Category 4 -->
+                            <div class="col-sm-3 mb-4">
+                                <div class="p-3 bg-light rounded text-center">
+                                    <i class="fas fa-birthday-cake fa-2x mb-2"></i>
+                                    <h6>Desserts</h6>
+                                    <p class="small">Cakes, Pastries, Ice Cream</p>
+                                    <button class="btn btn-sm btn-outline-primary">Explore</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-light py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>Delicious Bites</h5>
+                    <p>Fine dining experience</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-light">Menu</a></li>
+                        <li><a href="#" class="text-light">Reservations</a></li>
+                        <li><a href="#" class="text-light">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Follow Us</h5>
+                    <div class="social-links">
+                        <a href="#" class="text-light me-2">Facebook</a>
+                        <a href="#" class="text-light me-2">Instagram</a>
+                        <a href="#" class="text-light">Twitter</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </footer>
+
+    <!-- Bootstrap 5 CDN JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Local Bootstrap JS (for Exercise 1.2) -->
+    <script src="js/bootstrap.bundle.min.js"></script>
+
+    <div class="list-group">
+        <a href="typography-forms-examples.html" class="list-group-item list-group-item-action">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">Typography & Forms Examples</h5>
+                <small>New</small>
+            </div>
+            <p class="mb-1">Examples of Bootstrap typography utilities and form components including registration and login forms.</p>
+        </a>
+        <a href="forms-examples.html" class="list-group-item list-group-item-action">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">Bootstrap Forms Examples</h5>
+                <small>New</small>
+            </div>
+            <p class="mb-1">Examples of Bootstrap form components including registration form and login form with floating labels.</p>
+        </a>
+        <a href="flex-navbar.html" class="list-group-item list-group-item-action">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">Flexbox Navbar & Cards</h5>
+                <small>New</small>
+            </div>
+            <p class="mb-1">Examples of responsive navbar and card layout using Bootstrap flexbox utilities.</p>
+        </a>
+        <a href="typography-forms-demo.html" class="list-group-item list-group-item-action">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">Typography & Forms Demo</h5>
+                <small>New</small>
+            </div>
+            <p class="mb-1">Demonstration of Bootstrap typography utilities and form components with modern styling.</p>
+        </a>
+    </div>
 </body>
 </html> 
