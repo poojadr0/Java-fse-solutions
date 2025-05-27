@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local Community Event Portal</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1a365d;
+            --accent-color: #f59e0b;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            line-height: 1.5;
+            background: #f5f5f5;
+        }
+
+        #welcomeBanner {
+            background: var(--primary-color);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .highlight {
+            background: #fff3cd;
+            border-left: 4px solid var(--accent-color);
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .event-card {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .event-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: 2rem auto;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .coordinates {
+            background: #f8f9fa;
+            padding: 1rem;
+            font-family: monospace;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+
+        .enlarged {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 90vw;
+            max-height: 90vh;
+            z-index: 1000;
+            box-shadow: 0 0 20px rgba(0,0,0,0.3);
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 999;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(37, 99, 235, 0.25);
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .btn-primary:hover {
+            background-color: #1d4ed8;
+            border-color: #1d4ed8;
+        }
+
+        .error-message {
+            color: #dc2626;
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
+
+        .social-links a {
+            transition: opacity 0.3s ease;
+        }
+
+        .social-links a:hover {
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .event-card {
+                margin: 1rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="welcomeBanner">
+        <h1>Welcome to Community Connect Hub</h1>
+    </div>
+    
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary py-3">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-users me-2"></i>Community Connect
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active px-3 py-2" href="#"><i class="fas fa-home me-1"></i>Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link px-3 py-2" href="#events"><i class="fas fa-calendar me-1"></i>Events</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link px-3 py-2" href="#volunteer"><i class="fas fa-hands-helping me-1"></i>Volunteer</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link px-3 py-2" href="#contact"><i class="fas fa-envelope me-1"></i>Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link px-3 py-2" href="dashboard.html"><i class="fas fa-tachometer-alt me-1"></i>Dashboard</a>
+                    </li>
+                </ul>
+                <form class="d-flex ms-3">
+                    <div class="input-group">
+                        <input class="form-control" type="search" placeholder="Search events..." aria-label="Search">
+                        <button class="btn btn-light" type="submit">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mb-4">
+        <ul class="nav nav-tabs" id="communityTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="upcoming-tab" data-bs-toggle="tab" data-bs-target="#upcoming" type="button" role="tab">Upcoming Events</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="past-tab" data-bs-toggle="tab" data-bs-target="#past" type="button" role="tab">Past Events</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="volunteer-tab" data-bs-toggle="tab" data-bs-target="#volunteer" type="button" role="tab">Volunteer</button>
+            </li>
+        </ul>
+        <div class="tab-content p-3 border border-top-0 rounded-bottom" id="communityTabsContent">
+            <div class="tab-pane fade show active" id="upcoming" role="tabpanel">
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <div class="event-card">
+                            <h5 class="card-title">Summer Festival</h5>
+                            <p class="card-text">Join us for the biggest community celebration</p>
+                            <span class="badge bg-primary">June 20-22</span>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="event-card">
+                            <h5 class="card-title">Tech Workshop</h5>
+                            <p class="card-text">Learn coding and digital skills</p>
+                            <span class="badge bg-success">Every Monday</span>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="event-card">
+                            <h5 class="card-title">Art Exhibition</h5>
+                            <p class="card-text">Showcase of local artists</p>
+                            <span class="badge bg-info">July 15</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="past" role="tabpanel">
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <div class="event-card">
+                            <h5 class="card-title">Spring Clean-up</h5>
+                            <p class="card-text">Community park maintenance</p>
+                            <span class="badge bg-secondary">Completed</span>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="event-card">
+                            <h5 class="card-title">Food Drive</h5>
+                            <p class="card-text">Supporting local families</p>
+                            <span class="badge bg-secondary">Completed</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="volunteer" role="tabpanel">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <div class="event-card">
+                            <h5 class="card-title">Teaching Assistant</h5>
+                            <p class="card-text">Help with community education programs</p>
+                            <button class="btn btn-primary">Apply Now</button>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="event-card">
+                            <h5 class="card-title">Event Support</h5>
+                            <p class="card-text">Help organize and run community events</p>
+                            <button class="btn btn-primary">Apply Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body">
+                        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
+                            <div class="text-center text-md-start mb-3 mb-md-0">
+                                <h5 class="card-title mb-0">Community Event Calendar</h5>
+                                <p class="text-muted mb-0">Stay updated with upcoming events</p>
+                            </div>
+                            <div class="d-flex gap-2">
+                                <button class="btn btn-outline-primary">View Calendar</button>
+                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createEventModal">
+                                    <i class="fas fa-plus-circle me-1"></i>Add Event
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body">
+                        <h3 class="display-4 text-center mb-4">Community News</h3>
+                        
+                        <div class="mb-4">
+                            <h2 class="display-6 fw-bold text-primary">Summer Festival 2024</h2>
+                            <p class="lead text-capitalize">join us for the biggest community celebration of the year</p>
+                            <p class="text-muted">June 20-22, 2024 | Central Park</p>
+                        </div>
+
+                        <div class="mb-4">
+                            <h3 class="fw-bold text-uppercase">Community Achievements</h3>
+                            <p class="text-lowercase">Our community has reached new heights in volunteer participation</p>
+                            <p class="text-muted fst-italic">Over 1000 volunteers registered this month</p>
+                        </div>
+
+                        <div class="mb-4">
+                            <h4 class="fw-light">Upcoming Workshops</h4>
+                            <p class="text-capitalize">discover new skills and connect with experts</p>
+                            <ul class="list-unstyled">
+                                <li class="mb-2">
+                                    <span class="fw-bold">Digital Skills:</span>
+                                    <span class="text-muted">Every Monday</span>
+                                </li>
+                                <li class="mb-2">
+                                    <span class="fw-bold">Art & Craft:</span>
+                                    <span class="text-muted">Every Wednesday</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="text-center">
+                            <p class="display-6 fw-light">Join Our Community</p>
+                            <p class="lead text-muted">Together we can make a difference</p>
+                            <button class="btn btn-primary btn-lg">Get Started</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h5 class="card-title mb-0">Recent Activities</h5>
+                            <span class="badge bg-success">Active</span>
+                        </div>
+                        <div class="d-flex flex-column gap-3">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="mb-0">Community Clean-up</h6>
+                                    <small class="text-muted">June 5, 2024</small>
+                                </div>
+                                <button class="btn btn-sm btn-outline-primary">Details</button>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="mb-0">Tech Workshop</h6>
+                                    <small class="text-muted">June 12, 2024</small>
+                                </div>
+                                <button class="btn btn-sm btn-outline-primary">Details</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h5 class="card-title mb-0">Volunteer Opportunities</h5>
+                            <span class="badge bg-info">New</span>
+                        </div>
+                        <div class="d-flex flex-column gap-3">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="mb-0">Food Drive</h6>
+                                    <small class="text-muted">June 8, 2024</small>
+                                </div>
+                                <button class="btn btn-sm btn-outline-success">Join</button>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="mb-0">Youth Mentoring</h6>
+                                    <small class="text-muted">June 15, 2024</small>
+                                </div>
+                                <button class="btn btn-sm btn-outline-success">Join</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Community Features</h5>
+                        <p class="card-text">Explore our community portal features and stay connected with local events.</p>
+                        <div class="d-flex gap-2">
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createEventModal">Join Event</button>
+                            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#createEventModal">Volunteer</button>
+                            <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#createEventModal">Donate</button>
+                            <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#createEventModal">Report Issue</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Community Resources</h5>
+                        <p class="card-text">Access community resources and support services available to all members.</p>
+                        <div class="alert alert-info">
+                            <strong>New:</strong> Community Resource Center now open!
+                        </div>
+                        <div class="progress mb-3">
+                            <div class="progress-bar" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">75% Resources Available</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-md-6">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h3 class="card-title mb-4">Create Account</h3>
+                        <form>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="firstName" class="form-label">First Name</label>
+                                    <input type="text" class="form-control" id="firstName" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="lastName" class="form-label">Last Name</label>
+                                    <input type="text" class="form-control" id="lastName" required>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email Address</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">@</span>
+                                    <input type="email" class="form-control" id="email" placeholder="name@example.com" required>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Password</label>
+                                <div class="input-group">
+                                    <input type="password" class="form-control" id="password" required>
+                                    <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="phone" class="form-label">Phone Number</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">+1</span>
+                                    <input type="tel" class="form-control" id="phone" placeholder="(123) 456-7890">
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="newsletter">
+                                    <label class="form-check-label" for="newsletter">
+                                        Subscribe to community newsletter
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="terms" required>
+                                    <label class="form-check-label" for="terms">
+                                        I agree to the <a href="#">Terms and Conditions</a>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary w-100">Create Account</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h3 class="card-title mb-4">Member Login</h3>
+                        <form>
+                            <div class="form-floating mb-3">
+                                <input type="email" class="form-control" id="loginEmail" placeholder="name@example.com">
+                                <label for="loginEmail">Email address</label>
+                            </div>
+
+                            <div class="form-floating mb-3">
+                                <input type="password" class="form-control" id="loginPassword" placeholder="Password">
+                                <label for="loginPassword">Password</label>
+                            </div>
+
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="rememberMe">
+                                    <label class="form-check-label" for="rememberMe">
+                                        Remember me
+                                    </label>
+                                </div>
+                                <a href="#" class="text-decoration-none">Forgot password?</a>
+                            </div>
+
+                            <button type="submit" class="btn btn-success w-100">Sign In</button>
+
+                            <div class="text-center mt-3">
+                                <p class="mb-0">Don't have an account? <a href="#" class="text-decoration-none">Sign up</a></p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-12">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h3 class="card-title mb-4">Community Actions</h3>
+                        
+                        <div class="mb-4">
+                            <h4>Quick Actions</h4>
+                            <div class="d-flex flex-wrap gap-2 mb-3">
+                                <button class="btn btn-primary">Join Event</button>
+                                <button class="btn btn-success">Volunteer</button>
+                                <button class="btn btn-info">Donate</button>
+                                <button class="btn btn-warning">Report Issue</button>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <h4>Event Categories</h4>
+                            <div class="d-flex flex-wrap gap-2 mb-3">
+                                <button class="btn btn-outline-primary">Cultural</button>
+                                <button class="btn btn-outline-primary">Sports</button>
+                                <button class="btn btn-outline-primary">Education</button>
+                                <button class="btn btn-outline-primary">Environment</button>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <h4>Volunteer Opportunities</h4>
+                            <div class="d-flex flex-wrap gap-2 mb-3">
+                                <button class="btn btn-outline-success">Become a Volunteer</button>
+                                <button class="btn btn-outline-success">Join Events</button>
+                                <button class="btn btn-outline-info">Donate</button>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <h4>Notification Preferences</h4>
+                            <div class="d-flex flex-wrap gap-2 mb-3">
+                                <button class="btn btn-outline-info">Daily</button>
+                                <button class="btn btn-outline-info">Weekly</button>
+                                <button class="btn btn-outline-info">Monthly</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <p class="text-center">A local city council wants a lightweight, browser-based portal to help residents register for
+        events, check locations, and access basic services.</p>
+    
+        <table class="table">
+            <caption>Highlights of Local Community Events</caption>
+            <tr>
+                <td>
+                    <img src="https://www.rannutsavonline.com/blog/wp-content/uploads/2024/12/new-year-at-Rann-utsav-2025-830x474.webp" alt="Example Image" class="img-fluid rounded">
+                    <div class="desc">Annual celebration showcasing local arts, music, and dance.</div>
+                </td>
+                <td>
+                    <img src="https://us.123rf.com/450wm/jemastock/jemastock1904/jemastock190433313/123070635-park-cleaning-volunteers-with-trash-can-and-bags-cartoons-vector-illustration-graphic-design.jpg?ver=6" alt="Example Image" class="img-fluid rounded">
+                    <div class="desc">Community effort to clean parks and streets for a greener city.</div>
+                </td>
+                <td>
+                    <img src="https://img.freepik.com/premium-photo/free-photo-food-truck-city-festival-selective-focus_1041666-28178.jpg" alt="Example Image" class="img-fluid rounded">
+                    <div class="desc">Taste and enjoy dishes from local chefs and food trucks.</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <img src="https://media.istockphoto.com/id/1033906526/vector/donate-blood-concept-with-blood-bag-and-heart-blood-donation-vector-illustration-world-blood.jpg?s=612x612&w=0&k=20&c=bCDDE6DiGdlFspMA1RKRNeLBUWugSmi8U73ZCfYSbpg=" alt="Example Image" class="img-fluid rounded">
+                    <div class="desc">Save lives by donating blood at this community camp.</div>
+                </td>
+                <td>
+                    <img src="https://img.freepik.com/free-photo/3d-music-related-scene_23-2151125037.jpg?semt=ais_hybrid&w=740" alt="Example Image" class="img-fluid rounded">
+                    <div class="desc">Enjoy live performances by local bands and artists.</div>
+                </td>
+                <td>
+                    <img src="https://images.stockcake.com/public/f/e/5/fe563b8b-8a5a-4346-8fc1-4187d1a05a1e_large/high-tech-workshop-activity-stockcake.jpg" alt="Example Image" class="img-fluid rounded">
+                    <div class="desc">Hands-on sessions to learn coding and technology skills.</div>
+                </td>
+            </tr>
+        </table>
+
+        <section id="events">
+            <h2>Upcoming Events</h2>
+            <div class="event highlight">
+                <h3>Annual Cultural Fest</h3>
+                <p>Date: May 30, 2025 | Time: 6:00 PM</p>
+            </div>
+
+            <div class="event">
+                <h3>Community Clean-up Drive</h3>
+                <p>Date: June 5, 2025 | Time: 7:00 AM</p>
+            </div>
+
+            <div class="notice highlight">
+                <p>Registrations close on May 28! Hurry up!</p>
+            </div>
+        </section>
+
+        <section class="video-container">
+            <h2>Event Promo Video</h2>
+            <div class="video-wrapper">
+                <iframe 
+                    id="eventVideo"
+                    width="640" 
+                    height="360" 
+                    src="https://www.youtube.com/embed/u_qFlTu7HTw" 
+                    title="Event Promo Video"
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+            <div id="videoStatus" class="video-status">Video ready to play!</div>
+        </section>
+
+        <section class="registration-section">
+            <h2 class="text-center mb-4">Join Our Community Events</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <h3 class="mb-3">Event Registration</h3>
+                    <form action="#" method="post" id="registrationForm">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Full Name:</label>
+                            <input type="text" id="name" name="name" class="form-control" placeholder="John Smith" required autofocus>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email Address:</label>
+                            <input type="email" id="email" name="email" class="form-control" placeholder="john.smith@email.com" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="date" class="form-label">Preferred Event Date:</label>
+                            <input type="date" id="date" name="date" class="form-control" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="eventType" class="form-label">Select Event:</label>
+                            <select id="eventType" name="eventType" class="form-select" required>
+                                <option value="" disabled selected>Choose an event</option>
+                                <option value="cultural">Summer Cultural Festival</option>
+                                <option value="cleanup">Beach Clean-up Drive</option>
+                                <option value="food">Local Food & Art Fair</option>
+                                <option value="workshop">Tech Skills Workshop</option>
+                                <option value="music">Community Music Night</option>
+                                <option value="garden">Urban Garden Project</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="message" class="form-label">Special Requirements:</label>
+                            <textarea id="message" name="message" class="form-control" placeholder="Any dietary restrictions, accessibility needs, or special requests" rows="3"></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100">Register Now</button>
+                    </form>
+                </div>
+
+                <div class="col-md-6">
+                    <h3 class="mb-3">Share Your Experience</h3>
+                    <form id="feedbackForm">
+                        <div class="mb-3">
+                            <label for="phone" class="form-label">Contact Number:</label>
+                            <input type="tel" id="phone" class="form-control" placeholder="(123) 456-7890">
+                            <div id="phoneError" class="form-text text-danger"></div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="eventFee" class="form-label">Event Category:</label>
+                            <select id="eventFee" class="form-select">
+                                <option value="">Select event category</option>
+                                <option value="50">Community Member ($50)</option>
+                                <option value="100">Family Package ($100)</option>
+                                <option value="150">VIP Experience ($150)</option>
+                            </select>
+                            <div id="feeDisplay" class="form-text"></div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="feedback" class="form-label">Your Feedback:</label>
+                            <textarea id="feedback" class="form-control" placeholder="Tell us about your experience, suggestions for improvement, or ideas for future events" rows="3"></textarea>
+                            <div class="form-text">Characters: <span id="charCount">0</span></div>
+                        </div>
+
+                        <button type="submit" id="submitBtn" class="btn btn-success w-100">Submit Feedback</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <section class="geolocation-section">
+            <h2>Find Nearby Events</h2>
+            <button id="findNearbyEvents" class="btn btn-primary">Find Nearby Events</button>
+            <div id="coordinates" class="coordinates"></div>
+            <div id="geoError" class="error-message"></div>
+        </section>
+    </main>
+
+    <div class="overlay" id="overlay"></div>
+
+    <footer class="py-4 bg-dark text-white">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>Community Connect</h5>
+                    <p class="mb-0">Building stronger communities together</p>
+                </div>
+                <div class="col-md-4 text-center">
+                    <h5>Connect With Us</h5>
+                    <div class="d-flex justify-content-center gap-3 mt-3">
+                        <a href="#" class="text-white fs-4"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-white fs-4"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-white fs-4"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-white fs-4"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="text-white fs-4"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-4 text-md-end">
+                    <h5>Quick Actions</h5>
+                    <div class="d-flex justify-content-md-end gap-2 mt-3">
+                        <button class="btn btn-outline-light btn-sm">
+                            <i class="fas fa-envelope"></i>
+                        </button>
+                        <button class="btn btn-outline-light btn-sm">
+                            <i class="fas fa-phone"></i>
+                        </button>
+                        <button class="btn btn-outline-light btn-sm">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </button>
+                        <button class="btn btn-outline-light btn-sm">
+                            <i class="fas fa-share-alt"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="mb-0">&copy; 2024 Community Connect. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <a href="#" class="text-white me-3"><i class="fas fa-shield-alt me-1"></i>Privacy Policy</a>
+                    <a href="#" class="text-white me-3"><i class="fas fa-file-alt me-1"></i>Terms of Service</a>
+                    <a href="#" class="text-white"><i class="fas fa-question-circle me-1"></i>Help</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+
+    <script>
+        console.log('Page loaded - Debug mode active');
+
+        // Initialize Bootstrap tooltips
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        });
+
+        document.getElementById('phone').onblur = function() {
+            console.log('Phone validation triggered');
+            const phone = this.value;
+            const phoneError = document.getElementById('phoneError');
+            const phoneRegex = /^\d{10}$/;
+            
+            console.log('Phone number:', phone);
+            console.log('Regex test result:', phoneRegex.test(phone));
+            
+            if (!phoneRegex.test(phone)) {
+                phoneError.textContent = 'Please enter a valid 10-digit phone number';
+                console.warn('Invalid phone number format');
+            } else {
+                phoneError.textContent = '';
+                console.log('Phone number validated successfully');
+            }
+        };
+
+        document.getElementById('eventFee').onchange = function() {
+            console.log('Event fee changed');
+            const feeDisplay = document.getElementById('feeDisplay');
+            const selectedFee = this.value;
+            
+            console.log('Selected fee:', selectedFee);
+            
+            if (selectedFee) {
+                feeDisplay.textContent = `Selected fee: $${selectedFee}`;
+                console.log('Fee display updated');
+            } else {
+                feeDisplay.textContent = '';
+                console.log('Fee display cleared');
+            }
+        };
+
+        document.getElementById('submitBtn').onclick = function(e) {
+            e.preventDefault();
+            console.log('Feedback form submitted');
+            alert('Thank you for your feedback! Your submission has been received.');
+        };
+
+        const eventImages = document.querySelectorAll('img');
+        const overlay = document.getElementById('overlay');
+        console.log('Found images:', eventImages.length);
+
+        eventImages.forEach((img, index) => {
+            img.ondblclick = function() {
+                console.log(`Image ${index} enlarged`);
+                this.classList.add('enlarged');
+                overlay.style.display = 'block';
+            };
+        });
+
+        overlay.onclick = function() {
+            console.log('Overlay clicked - closing enlarged image');
+            document.querySelector('.enlarged')?.classList.remove('enlarged');
+            overlay.style.display = 'none';
+        };
+
+        document.getElementById('feedback').onkeyup = function() {
+            const count = this.value.length;
+            document.getElementById('charCount').textContent = count;
+            console.log('Character count:', count);
+        };
+
+        const videoFrame = document.getElementById('eventVideo');
+        const videoStatus = document.getElementById('videoStatus');
+        console.log('Video element found:', !!videoFrame);
+
+        const eventType = document.getElementById('eventType');
+        console.log('Event type element found:', !!eventType);
+        
+        window.onload = function() {
+            console.log('Window loaded - checking localStorage');
+            const savedEventType = localStorage.getItem('preferredEventType');
+            console.log('Saved event type:', savedEventType);
+            
+            if (savedEventType) {
+                eventType.value = savedEventType;
+                console.log('Restored event type from localStorage');
+            }
+        };
+
+        eventType.onchange = function() {
+            console.log('Event type changed:', this.value);
+            localStorage.setItem('preferredEventType', this.value);
+        };
+
+        document.getElementById('findNearbyEvents').onclick = function() {
+            console.log('Finding nearby events');
+            const options = {
+                enableHighAccuracy: true,
+                timeout: 5000,
+                maximumAge: 0
+            };
+
+            if (navigator.geolocation) {
+                console.log('Geolocation supported');
+                navigator.geolocation.getCurrentPosition(
+                    function(position) {
+                        console.log('Position obtained:', position.coords);
+                        const coords = document.getElementById('coordinates');
+                        coords.textContent = `Latitude: ${position.coords.latitude}\nLongitude: ${position.coords.longitude}`;
+                        document.getElementById('geoError').textContent = '';
+                    },
+                    function(error) {
+                        console.error('Geolocation error:', error);
+                        const errorMsg = document.getElementById('geoError');
+                        switch(error.code) {
+                            case error.PERMISSION_DENIED:
+                                errorMsg.textContent = 'Location access denied';
+                                break;
+                            case error.POSITION_UNAVAILABLE:
+                                errorMsg.textContent = 'Location information unavailable';
+                                break;
+                            case error.TIMEOUT:
+                                errorMsg.textContent = 'Location request timed out';
+                                break;
+                            default:
+                                errorMsg.textContent = 'An unknown error occurred';
+                        }
+                    },
+                    options
+                );
+            } else {
+                console.error('Geolocation not supported');
+                document.getElementById('geoError').textContent = 'Geolocation is not supported by your browser';
+            }
+        };
+
+        window.onbeforeunload = function(e) {
+            const feedback = document.getElementById('feedback').value;
+            if (feedback) {
+                console.log('Unsaved feedback detected');
+                return 'You have unsaved feedback. Are you sure you want to leave?';
+            }
+        };
+    </script>
+</body>
+</html>
